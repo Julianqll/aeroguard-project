@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { theme } from "../theme";
 import SessionProvider from "../components/SessionProvider";
 
+
 export const metadata = {
   title: "AeroGuard",
   description: "Mantenimiento de aviones",
@@ -25,7 +26,7 @@ export default async function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <SessionProvider session={session}>
-          <MantineProvider theme={theme}>{children}</MantineProvider>
+            <MantineProvider theme={theme}>{children}</MantineProvider>
         </SessionProvider>
       </body>
     </html>
