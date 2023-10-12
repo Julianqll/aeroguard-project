@@ -1,14 +1,18 @@
 import "@mantine/core/styles.css";
 import React from "react";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+import { getServerSession } from "next-auth";
 import { theme } from "../theme";
+import SessionProvider from "../components/SessionProvider";
 
 export const metadata = {
   title: "AeroGuard",
   description: "Mantenimiento de aviones",
 };
 
-export default function RootLayout({ children }: { children: any }) {
+export default async function RootLayout({ children }: { children: any }) {
+
+  const session = await getServerSession();
   return (
     <html lang="en">
       <head>
@@ -20,7 +24,9 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <SessionProvider session={session}>
+          <MantineProvider theme={theme}>{children}</MantineProvider>
+        </SessionProvider>
       </body>
     </html>
   );

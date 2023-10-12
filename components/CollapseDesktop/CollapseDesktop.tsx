@@ -13,6 +13,7 @@ import {
 import { LinksGroup } from '../NavbarLinksGroup/NavbarLinksGroup';
 import classes from './CollapseDesktop.module.css';
 import { UserButton } from '../UserButton/UserButton';
+import { AuthButton } from '../AuthButton';
 
 
 const mockdata = [
@@ -85,6 +86,7 @@ export function CollapseDesktop({
         </ScrollArea>
         <div className={classes.footer}>
           <UserButton />
+          <AuthButton></AuthButton>
         </div>
         </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
