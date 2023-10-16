@@ -53,21 +53,24 @@ export function AuthenticationImage() {
     
     return (
       <div className={classes.wrapper}>
+        <Title order={2} className={classes.topLeftText} ta="center" mt="md" m={20}>
+          AeroGuard
+        </Title>
         <Paper className={classes.form} radius={0} p={30}>
           <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
             Iniciar sesión
           </Title>
   
           <TextInput 
-            label="Email address" 
+            label="Correo electrónico" 
             placeholder="hello@gmail.com" 
             size="md" 
             value={valueEmail}
             onChange={(event) => setValueEmail(event.currentTarget.value)}
           />
           <PasswordInput 
-            label="Password" 
-            placeholder="Your password" 
+            label="Contraseña" 
+            placeholder="Tu contraseña" 
             mt="md" 
             size="md" 
             value={valuePassword}

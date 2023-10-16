@@ -2,8 +2,15 @@
   height: 100vh;  /* Asegura que ocupa toda la altura de la pantalla */
   width: 100%;    /* Asegura que ocupa toda la anchura de su contenedor */
   background-size: cover;
-  background-image: url(https://images.unsplash.com/photo-1484242857719-4b9144542727?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1280&q=80);
+  background-image: url(https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2948&q=80);
   display: flex; 
+}
+
+.topLeftText {
+  position: absolute;
+  top: 10px;     /* Distancia desde la parte superior */
+  left: 10px;    /* Distancia desde la izquierda */
+  z-index: 2;    /* Asegura que el texto se muestre por encima de otros elementos */
 }
 
 .form {
