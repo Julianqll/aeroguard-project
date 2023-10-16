@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
-//Procedure Listar Usuarios
+
 export const GET_USERS = gql`
   query GetUsers {
     usuario {
         usuarioId
-        nombre
-        apellido
+        nombres
+        apellidos
       }
   }
 `;
@@ -13,8 +13,8 @@ export const GET_USERS = gql`
 export const ADD_USER = gql`
 mutation AddUser($input: usuario_insert_input!) {
   insert_usuario_one(object: $input) {
-    nombre
-    apellido
+    nombres
+    apellidos
   }
 }
 

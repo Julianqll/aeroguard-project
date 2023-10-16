@@ -17,39 +17,29 @@ import { AuthButton } from '../AuthButton';
 
 
 const mockdata = [
-    { label: 'Dashboard', icon: IconGauge },
+    { label: 'Aviones', icon: IconGauge },
     {
-      label: 'Market news',
+      label: 'Reportes',
       icon: IconNotes,
-      initiallyOpened: true,
+      initiallyOpened: false,
       links: [
-        { label: 'Overview', link: '/' },
-        { label: 'Forecasts', link: '/' },
-        { label: 'Outlook', link: '/' },
-        { label: 'Real time', link: '/' },
+        { label: 'Opcion 1', link: '/' },
+        { label: 'Opcion 2', link: '/' },
+        { label: 'Opcion 3', link: '/' },
       ],
     },
     {
-      label: 'Releases',
+      label: 'Directivas',
       icon: IconCalendarStats,
       links: [
-        { label: 'Upcoming releases', link: '/' },
-        { label: 'Previous releases', link: '/' },
-        { label: 'Releases schedule', link: '/' },
+        { label: 'Opcion 1', link: '/' },
+        { label: 'Opcion 2', link: '/' },
+        { label: 'Opcion 3', link: '/' },
+        { label: 'Opcion 4', link: '/' },
+        { label: 'Opcion 5', link: '/' },
       ],
     },
-    { label: 'Analytics', icon: IconPresentationAnalytics },
-    { label: 'Contracts', icon: IconFileAnalytics },
-    { label: 'Settings', icon: IconAdjustments },
-    {
-      label: 'Security',
-      icon: IconLock,
-      links: [
-        { label: 'Enable 2FA', link: '/' },
-        { label: 'Change password', link: '/' },
-        { label: 'Recovery codes', link: '/' },
-      ],
-    },
+    { label: 'Usuarios', icon: IconPresentationAnalytics },
   ];
 
   
@@ -86,7 +76,6 @@ export function CollapseDesktop({
         </ScrollArea>
         <div className={classes.footer}>
           <UserButton />
-          <AuthButton></AuthButton>
         </div>
         </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>

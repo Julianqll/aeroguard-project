@@ -7,6 +7,5 @@ export default function GeneralLayout({
 }) {
   return (
     <CollapseDesktop>{children}</CollapseDesktop>
-      
   );
 }

@@ -3,23 +3,25 @@ import { DataCard } from "../../../components/DataCard/DataCard";
 import { DonutChart } from "../../../components/DonutChart/DonutChart";
 import { GET_USERS } from "../../../queries/userQuery";
 import { List } from "@mantine/core";
-import createApolloClient from "../../../apollo-client";
+import { useQuery } from "@apollo/client";
 
-export default async function PruebaPage() {
-    const client = createApolloClient();
-    const { data } = await client.query({
-      query: GET_USERS,
-    });
-    return <div>
-        Esto es una prueba de graphql
-        <List>
-        {data.usuario.map((usuario:any) => {
-            return (
-                <List.Item>{usuario.nombre}</List.Item>
-            );
-        })}
-        </List>
-        <DonutChart></DonutChart>
-    </div>;
-  }
-  
+export default function PruebaPage() {
+    const { loading, error, data } = useQuery(GET_USERS);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error : {error.message}</p>;
+
+    return (
+        <div>
+            Esto es una prueba de graphql
+            <List>
+            {data.usuario.map((usuario:any) => {
+                return (
+                    <List.Item key={usuario.id}>{usuario.nombres}</List.Item>
+                );
+            })}
+            </List>
+            <DonutChart />
+        </div>
+    );
+}
