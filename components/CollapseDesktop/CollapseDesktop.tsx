@@ -1,6 +1,6 @@
 "use client";
 import { useDisclosure } from '@mantine/hooks';
-import { AppShell, Burger, Group, ScrollArea, Skeleton } from '@mantine/core';
+import { AppShell, Burger, Group, ScrollArea, Skeleton, Title } from '@mantine/core';
 import {
     IconNotes,
     IconCalendarStats,
@@ -63,7 +63,9 @@ export function CollapseDesktop({
         <Group h="100%" px="md">
           <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
           <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
-          AeroGuard
+          <Title order={2} ta="center">
+            AeroGuard
+          </Title>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="sm">
