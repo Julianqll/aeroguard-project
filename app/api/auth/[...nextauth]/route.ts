@@ -1,7 +1,12 @@
+import { useQuery } from "@apollo/client";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { SIGNIN_USER } from "../../../../queries/userQuery";
+import { client } from "../../../../apolloClient";
+import bcrypt from "bcryptjs";
 
 export const authOptions = {
+  
     providers: [
         CredentialsProvider({
           // The name to display on the sign in form (e.g. "Sign in with...")
@@ -15,19 +20,40 @@ export const authOptions = {
             password: { label: "Password", type: "password" }
           },
           async authorize(credentials, req) {
-            // Add logic here to look up the user from the credentials supplied
-            const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
-      
-            if (user) {
-              // Any object returned will be saved in `user` property of the JWT
-              return user
-            } else {
-              // If you return null then an error will be displayed advising the user to check their details.
-              return null
-      
-              // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+            try {
+              const { data } = await client.query({
+                query: SIGNIN_USER,
+                variables: {
+                  email: credentials!.username,
+                }
+              });
+          
+              if (data && data.usuario.length > 0) {
+                let passwordMatches = await bcrypt.compare(credentials!.password, data.usuario[0].contrasena);
+                if (passwordMatches)
+                {
+                  const user = {
+                    id: data.usuario[0].id, // Assuming your user has an id field.
+                    name: `${data.usuario[0].nombres} ${data.usuario[0].apellidos}`,
+                    email: data.usuario[0].correo
+                  };
+                  return user;
+                }else {
+                  throw new Error("Las credenciales proporcionadas son incorrectas.");
+                }
+              } else {
+              throw new Error("Usuario no encontrado.");
+              }
+              
+          
+              return null; 
+            } catch (error) {
+              console.error("Error authorizing user:", error);
+              return null;
             }
           }
+          
+          
         })
       ]
 }

@@ -2,7 +2,6 @@
 import { UnstyledButton, Group, Avatar, Text, rem, Button } from '@mantine/core';
 import { IconChevronRight, IconDownload } from '@tabler/icons-react';
 import classes from './UserButton.module.css';
-import { AuthButton } from '../AuthButton';
 import {signIn, signOut, useSession} from "next-auth/react";
 
 

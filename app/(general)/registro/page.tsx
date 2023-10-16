@@ -11,8 +11,14 @@ import InputFields from "../../../components/InputFields/InputFields";
 import RolSelector from "../../../components/RolSelector/RolSelector";
 import { generateRandomPassword } from "../../../utils/utils";
 import { isValidDNI, isValidEmail, isValidPhone } from "../../../utils/validators";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 function RegistroPage() {
+    const {data : session} = useSession();
+    if (!session) {
+      redirect("/signIn")
+    }
     const [valueNames, setValueNames] = useState('');
     const [valueLastName, setValueLastName] = useState('');
     const [valueDNI, setValueDNI] = useState('');

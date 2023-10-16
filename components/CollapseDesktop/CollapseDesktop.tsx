@@ -6,14 +6,10 @@ import {
     IconCalendarStats,
     IconGauge,
     IconPresentationAnalytics,
-    IconFileAnalytics,
-    IconAdjustments,
-    IconLock,
   } from '@tabler/icons-react';
 import { LinksGroup } from '../NavbarLinksGroup/NavbarLinksGroup';
 import classes from './CollapseDesktop.module.css';
 import { UserButton } from '../UserButton/UserButton';
-import { AuthButton } from '../AuthButton';
 
 
 const mockdata = [

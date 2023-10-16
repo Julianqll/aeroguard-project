@@ -10,28 +10,73 @@ import {
     Anchor,
   } from '@mantine/core';
   import classes from './AuthenticationImage.module.css';
-  
-  export function AuthenticationImage() {
+import { useState } from 'react';
+import { notifications } from '@mantine/notifications';
+import { IconX } from '@tabler/icons-react';
+import { signIn } from 'next-auth/react';
+
+export function AuthenticationImage() {
+    const [valueEmail, setValueEmail] = useState('');
+    const [valuePassword, setValuePassword] = useState('');
+
+    const handleLogin = async () => {
+      if (!valueEmail || !valuePassword) {
+        notifications.show({
+          color: 'red',
+          title: 'Completar campos',
+          message: 'Por favor completa todos los campos',
+          icon: <IconX size="1rem" />,
+          autoClose: false
+        });
+        return;
+      }
+    
+      const result = await signIn("credentials", {
+        username: valueEmail,
+        password: valuePassword,
+        redirect: false,
+      });
+
+      if (result!.error) {
+        notifications.show({
+            color: 'red',
+            title: 'Error de inicio de sesión',
+            message: result!.error,
+            icon: <IconX size="1rem" />,
+            autoClose: false
+        });
+    } else {
+        // Redirecciona en caso de éxito
+        window.location.href = "/prueba";
+    }
+    };
+    
     return (
       <div className={classes.wrapper}>
         <Paper className={classes.form} radius={0} p={30}>
           <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
-            Welcome back to Mantine!
+            Iniciar sesión
           </Title>
   
-          <TextInput label="Email address" placeholder="hello@gmail.com" size="md" />
-          <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" />
-          <Checkbox label="Keep me logged in" mt="xl" size="md" />
-          <Button fullWidth mt="xl" size="md">
-            Login
+          <TextInput 
+            label="Email address" 
+            placeholder="hello@gmail.com" 
+            size="md" 
+            value={valueEmail}
+            onChange={(event) => setValueEmail(event.currentTarget.value)}
+          />
+          <PasswordInput 
+            label="Password" 
+            placeholder="Your password" 
+            mt="md" 
+            size="md" 
+            value={valuePassword}
+            onChange={(event) => setValuePassword(event.currentTarget.value)}
+          />
+          <Button fullWidth mt="xl" size="md" onClick={handleLogin}>
+            Ingresar
           </Button>
   
-          <Text ta="center" mt="md">
-            Don&apos;t have an account?{' '}
-            <Anchor<'a'> href="#" fw={700} onClick={(event) => event.preventDefault()}>
-              Register
-            </Anchor>
-          </Text>
         </Paper>
       </div>
     );
