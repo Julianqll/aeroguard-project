@@ -1,0 +1,32 @@
+/* Reportes.module.css */
+.container {
+    padding: 20px;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .metricsWrapper {
+    gap: 20px;
+  }
+  
+  .metricBox {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .chartWrapper {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tableHeader {
+    margin-top: 30px;
+  }
+  

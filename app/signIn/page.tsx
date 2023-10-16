@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 export default function SignInPage() {
   const {data : session} = useSession();
     if (session) {
-      redirect("/prueba")
+      redirect("/dashboard")
     }
     return <AuthenticationImage></AuthenticationImage>;
   }

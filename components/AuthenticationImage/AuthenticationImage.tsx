@@ -47,7 +47,7 @@ export function AuthenticationImage() {
         });
     } else {
         // Redirecciona en caso de éxito
-        window.location.href = "/prueba";
+        window.location.href = "/dashboard";
     }
     };
     

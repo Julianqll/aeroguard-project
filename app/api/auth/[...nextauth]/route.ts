@@ -44,9 +44,6 @@ export const authOptions = {
               } else {
               throw new Error("Usuario no encontrado.");
               }
-              
-          
-              return null; 
             } catch (error) {
               console.error("Error authorizing user:", error);
               return null;
