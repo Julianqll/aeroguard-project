@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
-const PART_COLORS = ['red', 'blue', 'green', 'yellow', 'purple'];
+const PART_COLORS = ['red', 'red'];
 
 const Airplane: React.FC<{ colors?: { [materialName: string]: string } }> = ({ colors }) => {
   const gltf = useLoader(GLTFLoader, '/3DModels/low-poly_airplane.glb');
@@ -39,7 +39,7 @@ const Airplane: React.FC<{ colors?: { [materialName: string]: string } }> = ({ c
         const color = new THREE.Color(PART_COLORS[groupIndex % PART_COLORS.length]);
         indices.forEach(index => {
           colors.set(color);
-          colorAttribute.setXYZ(index, colors.r, colors.g, colors.b);
+          colorAttribute.setXYZ(index+300,colors.r, colors.g, colors.b);
         });
       });
       child.material.vertexColors = true;
@@ -53,19 +53,13 @@ const Airplane: React.FC<{ colors?: { [materialName: string]: string } }> = ({ c
 const Scene: React.FC = () => {
   const controlsRef = useRef(null);
   
-  // Ejemplo de colores para diferentes materiales (ajusta los nombres de los materiales según tu modelo)
-  const [materialColors, setMaterialColors] = useState<{ [materialName: string]: string }>({
-    'Material1': 'red', // Ejemplo, reemplaza 'Material1' con el nombre real del material
-    'Material2': 'blue' // Ejemplo, reemplaza 'Material2' con el nombre real del material
-  });
-
   return (
     <div>
       <Canvas style={{ height: '500px', overflow: 'hidden' }}>
         <perspectiveCamera position={[0, 0, 5]} />
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        <Airplane colors={materialColors} />
+        <Airplane/>
         <OrbitControls ref={controlsRef} minDistance={100} maxDistance={100} />
       </Canvas>
       {/* Puedes agregar botones o controles para cambiar los colores de los materiales aquí */}
