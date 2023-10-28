@@ -1,11 +1,9 @@
 "use client";
 
-import { TableSelection } from "../../../components/TableSelection/TableSelection";
+import UserListView from "../../../components/UserListView/UserListView";
 
 export default function UsuariosPage() {
     return (
-        <>
-        <TableSelection></TableSelection>
-        </>
+        <UserListView></UserListView>
     );
 }

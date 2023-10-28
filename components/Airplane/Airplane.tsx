@@ -39,7 +39,9 @@ const Airplane: React.FC<{ colors?: { [materialName: string]: string } }> = ({ c
         const color = new THREE.Color(PART_COLORS[groupIndex % PART_COLORS.length]);
         indices.forEach(index => {
           colors.set(color);
-          colorAttribute.setXYZ(index+300,colors.r, colors.g, colors.b);
+          //si cambio a index-900 -> sombrea derecha
+          //cambio a index+300 -> sombrea izquierda
+          colorAttribute.setXYZ(index-900,colors.r, colors.g, colors.b);
         });
       });
       child.material.vertexColors = true;

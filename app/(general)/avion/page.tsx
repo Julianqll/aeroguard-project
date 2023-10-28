@@ -1,7 +1,7 @@
 "use client";
 import Scene from "../../../components/Airplane/Airplane";
 
-export default function ModeloPage() {
+export default function AvionPage() {
     return (
         <Scene />
     );
