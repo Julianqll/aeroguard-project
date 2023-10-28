@@ -10,7 +10,7 @@ const Airplane: React.FC<{ colors?: { [materialName: string]: string } }> = ({ c
   const gltf = useLoader(GLTFLoader, '/3DModels/low-poly_airplane.glb');
 
   // Rotación inicial del avión
-  gltf.scene.rotation.set(0, Math.PI / 4, 0);
+  gltf.scene.rotation.set(0, Math.PI / 5, 0.5);
 
   // Agrupar y colorear partes basadas en normales
   gltf.scene.traverse((child) => {
@@ -57,7 +57,7 @@ const Scene: React.FC = () => {
   
   return (
     <div>
-      <Canvas style={{ height: '500px', overflow: 'hidden' }}>
+      <Canvas style={{ height: '400px', overflow: 'hidden' }}>
         <perspectiveCamera position={[0, 0, 5]} />
         <ambientLight />
         <pointLight position={[10, 10, 10]} />

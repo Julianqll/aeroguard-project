@@ -1,8 +1,8 @@
 "use client";
-import Scene from "../../../components/Airplane/Airplane";
+import AirplaneModelView from "../../../components/AirplaneModelView/AirplaneModelView";
 
 export default function AvionPage() {
     return (
-        <Scene />
+        <AirplaneModelView />
     );
 }
