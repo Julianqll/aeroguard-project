@@ -26,12 +26,14 @@ const InputFields: React.FC<InputFieldsProps> = ({ values, setters }) => {
       <Flex direction="column" align="center" style={{ gap: "20px" }}>
         <Flex mih={50} gap="xl" justify="center" align="flex-start" direction="row" wrap="wrap">
           <TextInput
+            disabled
             label="Nombres"
             placeholder="Tus nombres"
             value={values.valueNames}
             onChange={(event) => setters.setValueNames(event.currentTarget.value)}
           />
           <TextInput
+            disabled
             label="Apellidos"
             placeholder="Tus apellidos"
             value={values.valueLastName}
