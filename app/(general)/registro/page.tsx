@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextInput, Button, Flex, Anchor, Text, Combobox, InputBase, useCombobox, Input } from "@mantine/core";
 import { Notification, rem } from '@mantine/core';
 import bcrypt from "bcryptjs";
@@ -13,6 +13,7 @@ import { generateRandomPassword } from "../../../utils/utils";
 import { isValidDNI, isValidEmail, isValidPhone } from "../../../utils/validators";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { fetchPersonData } from "../../../external_apis/reniec";
 
 function RegistroPage() {
     const {data : session} = useSession();
@@ -28,6 +29,21 @@ function RegistroPage() {
     const [valueRol, setValueRol] = useState<string | null>(null);
     const [addUser, { data, loading, error }] = useMutation(ADD_USER);
 
+    useEffect(() => {
+      if (isValidDNI(valueDNI)) {
+        const fetchData = async () => {
+          const data = await fetchPersonData(valueDNI);
+          setValueNames(capitalize(data.nombres));
+          setValueLastName(capitalize(data.apellidoPaterno + " " + data.apellidoMaterno));
+        };
+        fetchData();
+      }
+    }, [valueDNI]);
+    
+    function capitalize(str:string) {
+      return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+    }
+  
 
   const handleRegister = async () => {
     if (!valueNames || !valueLastName || !valueDNI || !valueStreet || !valueEmail || !valueTelephone || !valueRol) {
