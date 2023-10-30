@@ -22,23 +22,24 @@ function RegistroPage() {
     }
     const [valueNames, setValueNames] = useState('');
     const [valueLastName, setValueLastName] = useState('');
-    const [valueDNI, setValueDNI] = useState('');
+    const [valueDocumento, setValueDocumento] = useState('');
     const [valueStreet, setValueStreet] = useState('');
     const [valueEmail, setValueEmail] = useState('');
     const [valueTelephone, setValueTelephone] = useState('');
     const [valueRol, setValueRol] = useState<string | null>(null);
+    const [valueTipoDocumento, setValueTipoDocumento] = useState<string | null>(null);
     const [addUser, { data, loading, error }] = useMutation(ADD_USER);
 
     useEffect(() => {
-      if (isValidDNI(valueDNI)) {
+      if (isValidDNI(valueDocumento)) {
         const fetchData = async () => {
-          const data = await fetchPersonData(valueDNI);
+          const data = await fetchPersonData(valueDocumento);
           setValueNames(capitalize(data.nombres));
           setValueLastName(capitalize(data.apellidoPaterno + " " + data.apellidoMaterno));
         };
         fetchData();
       }
-    }, [valueDNI]);
+    }, [valueDocumento]);
     
     function capitalize(str:string) {
       return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
@@ -46,7 +47,7 @@ function RegistroPage() {
   
 
   const handleRegister = async () => {
-    if (!valueNames || !valueLastName || !valueDNI || !valueStreet || !valueEmail || !valueTelephone || !valueRol) {
+    if (!valueNames || !valueLastName || !valueDocumento || !valueStreet || !valueEmail || !valueTelephone || !valueRol || !valueTipoDocumento) {
         notifications.show({
             color: 'red',
             title: 'Completar campos',
@@ -70,7 +71,7 @@ function RegistroPage() {
             icon: <IconX size="1rem" />,
             autoClose: false
           });
-        } else if (!isValidDNI(valueDNI)) {
+        } else if (!isValidDNI(valueDocumento)) {
             notifications.show({
                 color: 'red',
                 title: 'Campo inválido',
@@ -80,8 +81,19 @@ function RegistroPage() {
               });    
         }
          else {
-            const randomPassword = generateRandomPassword();
+            //const randomPassword = generateRandomPassword();
+            const randomPassword = "123456"
             const hashedPassword = await bcrypt.hash(randomPassword, 10);
+
+            let valueTipoDocumentoFinal;
+            if (valueTipoDocumento === "DNI")
+            {
+              valueTipoDocumentoFinal = 1;
+            }
+            else if (valueTipoDocumento === "Carnet de Extranjeria")
+            {
+              valueTipoDocumentoFinal = 2;
+            }
 
             let valueRolFinal;
             if (valueRol === "Administrador")
@@ -104,8 +116,9 @@ function RegistroPage() {
               direccion: valueStreet,
               telefono: valueTelephone,
               rolId: valueRolFinal,
-              dni: valueDNI,
+              numeroDocumento: valueDocumento,
               estado: true,
+              tipoDocumento: valueTipoDocumentoFinal
             };
         
             try {
@@ -120,6 +133,7 @@ function RegistroPage() {
                 autoClose: false
               });
             } catch (error) {
+              console.log(error);
                 notifications.show({
                     color: 'red',
                     title: 'Error en el registro',
@@ -135,8 +149,8 @@ function RegistroPage() {
     <div>
       <Flex direction="column" align="center" style={{ gap: "20px" }}>
         <InputFields 
-          values={{ valueNames, valueLastName, valueEmail, valueTelephone, valueDNI, valueStreet }}
-          setters={{ setValueNames, setValueLastName, setValueEmail, setValueTelephone, setValueDNI, setValueStreet }}
+          values={{ valueNames, valueLastName, valueEmail, valueTelephone, valueDocumento, valueStreet, valueTipoDocumento}}
+          setters={{ setValueNames, setValueLastName, setValueEmail, setValueTelephone, setValueDocumento, setValueStreet, setValueTipoDocumento}}
         />
         <RolSelector value={valueRol} setValue={setValueRol} />
         <Button onClick={handleRegister}>Registrar usuario</Button>
