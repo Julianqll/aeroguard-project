@@ -24,11 +24,10 @@ export default function PruebaPage() {
             <List>
             {data.usuario.map((usuario:any) => {
                 return (
-                    <List.Item key={usuario.id}>{usuario.nombres}</List.Item>
+                    <List.Item key={usuario.id}>{usuario.apellidos}</List.Item>
                 );
             })}
             </List>
-            <DonutChart />
         </div>
     );
 }
