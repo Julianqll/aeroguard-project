@@ -18,7 +18,6 @@ Este proyecto está construido utilizando las siguientes tecnologías y herramie
 - **Yarn**: Gestor de dependencias.
 - **Hasura**: Motor de base de datos instantáneo y autohospedado.
 - **Auth**: Autenticación con NextAuth.js.
-- (Menciona otras tecnologías, bibliotecas y herramientas utilizadas).
 
 ## Configuración del Entorno
 
