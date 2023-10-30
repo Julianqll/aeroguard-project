@@ -14,8 +14,7 @@ export function HeroImageBackground() {
 
         <Container size={640}>
           <Text size="lg" className={classes.description}>
-            Build more reliable software with AI companion. AI is also trained to detect lazy
-            developers who do nothing and just complain on Twitter.
+          En Aeroguard, entendemos la pasión y la responsabilidad que conlleva volar. Nuestra plataforma innovadora está diseñada específicamente para propietarios, operadores y técnicos de avionetas, brindando una solución integral para el mantenimiento, gestión y seguimiento del estado de tus aeronaves
           </Text>
         </Container>
 
@@ -26,7 +25,7 @@ export function HeroImageBackground() {
             size="lg"
             onClick={() => window.location.href="/signIn"}
           >
-            Get started
+            Ingresar
           </Button>
         </div>
       </div>
