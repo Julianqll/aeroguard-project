@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TextInput, Flex } from "@mantine/core";
+import TipoDocumentoSelector from "../TipoDocumentoSelector/TipoDocumentoSelector";
 
 interface InputFieldsProps {
   values: {
@@ -7,33 +8,50 @@ interface InputFieldsProps {
     valueLastName: string;
     valueEmail: string;
     valueTelephone: string;
-    valueDNI: string;
+    valueDocumento: string;
     valueStreet: string;
+    valueTipoDocumento: string | null;
   };
   setters: {
     setValueNames: React.Dispatch<React.SetStateAction<string>>;
     setValueLastName: React.Dispatch<React.SetStateAction<string>>;
     setValueEmail: React.Dispatch<React.SetStateAction<string>>;
     setValueTelephone: React.Dispatch<React.SetStateAction<string>>;
-    setValueDNI: React.Dispatch<React.SetStateAction<string>>;
+    setValueDocumento: React.Dispatch<React.SetStateAction<string>>;
     setValueStreet: React.Dispatch<React.SetStateAction<string>>;
+    setValueTipoDocumento: React.Dispatch<React.SetStateAction<string | null>>;
   };
 }
 
 const InputFields: React.FC<InputFieldsProps> = ({ values, setters }) => {
+  const [isDNIEnabled, setIsDNIEnabled] = useState(true);
+  
+  useEffect(() => {
+    if (values.valueTipoDocumento == "DNI")
+    {
+      setIsDNIEnabled(true);
+    }
+    else if (values.valueTipoDocumento == "Carnet de Extranjeria")
+    {
+      setIsDNIEnabled(false);
+    }
+  }, [values.valueTipoDocumento]);
+
+
+
   return (
     <div>
       <Flex direction="column" align="center" style={{ gap: "20px" }}>
         <Flex mih={50} gap="xl" justify="center" align="flex-start" direction="row" wrap="wrap">
           <TextInput
-            disabled
+            disabled={isDNIEnabled}
             label="Nombres"
             placeholder="Tus nombres"
             value={values.valueNames}
             onChange={(event) => setters.setValueNames(event.currentTarget.value)}
           />
           <TextInput
-            disabled
+            disabled={isDNIEnabled}
             label="Apellidos"
             placeholder="Tus apellidos"
             value={values.valueLastName}
@@ -58,9 +76,10 @@ const InputFields: React.FC<InputFieldsProps> = ({ values, setters }) => {
           <TextInput
             label="DNI"
             placeholder="Documento de identidad"
-            value={values.valueDNI}
-            onChange={(event) => setters.setValueDNI(event.currentTarget.value)}
+            value={values.valueDocumento}
+            onChange={(event) => setters.setValueDocumento(event.currentTarget.value)}
           />
+          <TipoDocumentoSelector value={values.valueTipoDocumento} setValue={setters.setValueTipoDocumento} />
           <TextInput
             label="Dirección"
             placeholder="Dirección de prueba"
