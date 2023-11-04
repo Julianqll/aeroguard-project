@@ -73,7 +73,13 @@ function FormularioDirectivas() {
 
   return (
     <div>
-      <Flex direction="column" align="center" style={{ gap: "20px" }}>
+      <Flex mt={50} direction="column" align="center" style={{ gap: "30px" }}>
+        <Text
+            size="xl"
+            fw={500}
+        >
+            Formulario de Directivas
+        </Text>
         <InputFieldsDirectivas
             values={{valueAdDirectiva, valueDocumentoRef, valueAdReemp, valueAdDescrip, valueDocumInstruc, valueIntervalo, valueFecha}}
             setters={{setValueAdDirectiva, setValueDocumentoRef, setValueAdReemp, setValueAdDescrip, setValueDocumInstruc, setValueIntervalo, setValueFecha}}

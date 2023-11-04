@@ -27,7 +27,14 @@ interface InputFieldsDirectivasProps {
 const InputFieldsDirectivas: React.FC<InputFieldsDirectivasProps> = ({ values, setters }) => {
   
   return (
-    <div>
+    <Flex
+        mt={20}
+        gap="xl"
+        justify="center"
+        align="center"
+        direction="column"
+        wrap="wrap"
+    >
         <Flex
             gap="xl"
             justify="center"
@@ -73,6 +80,14 @@ const InputFieldsDirectivas: React.FC<InputFieldsDirectivasProps> = ({ values, s
                 value={values.valueDocumInstruc}
                 onChange={(event) => setters.setValueDocumInstruc(event.currentTarget.value)}
             />
+        </Flex>
+        <Flex
+            gap="xl"
+            justify="center"
+            align="center"
+            direction="row"
+            wrap="wrap"
+        >
             <TextInput
                 label="Intervalo"
                 placeholder="Complete con el intervalo"
@@ -86,7 +101,7 @@ const InputFieldsDirectivas: React.FC<InputFieldsDirectivasProps> = ({ values, s
             placeholder="Seleccione la fecha"
             />
         </Flex>
-    </div>
+    </Flex>
   );
 }
 
