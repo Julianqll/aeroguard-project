@@ -1,0 +1,36 @@
+/* Reportes.module.css */
+.container {
+    padding: 20px;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .metricsWrapper {
+    gap: 20px;
+  }
+  
+  .metricBox {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .metricBox > div:first-child {
+    margin-bottom: 20px; /* o el valor que necesites */
+}
+
+  
+  .chartWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 350px;
+  }
+  
+  .tableHeader {
+    margin-top: 30px;
+  }
+  
