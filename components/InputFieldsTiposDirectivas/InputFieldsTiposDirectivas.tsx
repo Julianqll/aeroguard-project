@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TextInput, Flex } from "@mantine/core";
 import TipoDocumentoSelector from "../TipoDocumentoSelector/TipoDocumentoSelector";
 
-interface DirectivasInputFieldsProps {
+interface InputFieldsTiposDirectivasProps {
   values: {
     valueNombreDirectiva: string;
     valueDescripcionDirectiva: string;
@@ -13,7 +13,7 @@ interface DirectivasInputFieldsProps {
   };
 }
 
-const DirectivasInputFields: React.FC<DirectivasInputFieldsProps> = ({ values, setters }) => {
+const InputFieldsTiposDirectivas: React.FC<InputFieldsTiposDirectivasProps> = ({ values, setters }) => {
   
   return (
     <div>
@@ -41,4 +41,4 @@ const DirectivasInputFields: React.FC<DirectivasInputFieldsProps> = ({ values, s
   );
 }
 
-export default DirectivasInputFields;
+export default InputFieldsTiposDirectivas;

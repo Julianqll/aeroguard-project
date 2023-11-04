@@ -4,46 +4,35 @@ import { TextInput, Button, Flex, Anchor, Text, Combobox, InputBase, useCombobox
 import { useMutation, useQuery } from "@apollo/client";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { notifications } from "@mantine/notifications";
-import { isValidDNI, isValidEmail, isValidPhone } from "../../../utils/validators";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { fetchPersonData } from "../../../external_apis/reniec";
-import InputFieldsTiposDirectivas from "../../../components/InputFieldsTiposDirectivas/InputFieldsTiposDirectivas";
-import { ADD_TIPO_DIRECTIVA } from "../../../queries/tipoDirectivaQuery";
+import { ADD_TIPO_DIRECTIVA } from "../../queries/tipoDirectivaQuery";
+import { isValidDNI } from "../../utils/validators";
+import { fetchPersonData } from "../../external_apis/reniec";
+import InputFieldsDirectivas from "../InputFieldDirectivas/InputFieldDirectivas";
 
-function TipoDirectivaPage() {
+function FormularioDirectivas() {
     const {data : session} = useSession();
     if (!session) {
       redirect("/signIn")
     }
-    const [valueNombreDirectiva, setValueNombreDirectiva] = useState("");
-    const [valueDescripcionDirectiva, setValueDescripcionDirectiva] = useState("");
+    const [valueAdDirectiva, setValueAdDirectiva] = useState<string>("");
+    const [valueDocumentoRef, setValueDocumentoRef] = useState<string>("");
+    const [valueAdReemp, setValueAdReemp] = useState<string>("");
+    const [valueAdDescrip, setValueAdDescrip] = useState<string>("");
+    const [valueDocumInstruc, setValueDocumInstruc] = useState<string>("");
+    const [valueIntervalo, setValueIntervalo] = useState<string>("");
+    const [valueFecha, setValueFecha] = useState<Date>(new Date());
     const [valueNames, setValueNames] = useState('');
     const [valueLastName, setValueLastName] = useState('');
-    const [valueDocumento, setValueDocumento] = useState('');
     const [addTipoDirectiva, { data, loading, error }] = useMutation(ADD_TIPO_DIRECTIVA);
-
-    useEffect(() => {
-      if (isValidDNI(valueDocumento)) {
-        const fetchData = async () => {
-          const data = await fetchPersonData(valueDocumento);
-          setValueNames(capitalize(data.nombres));
-          setValueLastName(capitalize(data.apellidoPaterno + " " + data.apellidoMaterno));
-        };
-        fetchData();
-      }
-    }, [valueDocumento]);
-    
-    function capitalize(str:string) {
-      return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
-    }
   
 
   const handleRegister = async () => {
-    if (!valueNombreDirectiva) {
+    if (!valueAdDirectiva || !valueDocumentoRef || !valueAdReemp || !valueAdDescrip || !valueDocumInstruc || !valueIntervalo || !valueFecha) {
         notifications.show({
             color: 'red',
-            title: 'Completar el nombre de directiva',
+            title: 'Completar todos los campos',
             message: 'Por favor completa todos los campos',
             icon: <IconX size="1rem" />,
             autoClose: false
@@ -52,8 +41,8 @@ function TipoDirectivaPage() {
         else {
 
         const directiva = {
-            nombreTipoDirectiva: valueNombreDirectiva,
-            descripTipoDirectiva: valueDescripcionDirectiva,
+            //nombreTipoDirectiva: valueNombreDirectiva,
+            //descripTipoDirectiva: valueDescripcionDirectiva,
         };
     
         try {
@@ -85,14 +74,14 @@ function TipoDirectivaPage() {
   return (
     <div>
       <Flex direction="column" align="center" style={{ gap: "20px" }}>
-        <InputFieldsTiposDirectivas
-            values={{valueNombreDirectiva, valueDescripcionDirectiva}}
-            setters={{setValueNombreDirectiva, setValueDescripcionDirectiva}}
+        <InputFieldsDirectivas
+            values={{valueAdDirectiva, valueDocumentoRef, valueAdReemp, valueAdDescrip, valueDocumInstruc, valueIntervalo, valueFecha}}
+            setters={{setValueAdDirectiva, setValueDocumentoRef, setValueAdReemp, setValueAdDescrip, setValueDocumInstruc, setValueIntervalo, setValueFecha}}
         />
-        <Button onClick={handleRegister}>Registrar directiva</Button>
+        <Button onClick={handleRegister}>Registrar nueva directiva</Button>
       </Flex>
     </div>
   );
 }
 
-export default TipoDirectivaPage;
+export default FormularioDirectivas;

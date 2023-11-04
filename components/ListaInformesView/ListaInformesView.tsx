@@ -1,6 +1,6 @@
 // Reportes.js
 "use client";
-import { Container, Grid, Text } from '@mantine/core';
+import { Text } from '@mantine/core';
 import classes from './ListaInformesView.module.css';
 import { UsersRolesTable } from '../UserRolesTable/UserRolesTable';
 
