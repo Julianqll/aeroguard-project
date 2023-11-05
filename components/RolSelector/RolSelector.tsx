@@ -1,24 +1,59 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
+import { DocumentNode, useQuery } from "@apollo/client";
 import { Combobox, InputBase, Input, useCombobox, Text } from "@mantine/core";
 import { GET_ROLS } from "../../queries/rolQuery";
+import { GET_TIPOS_DOCUMENTO } from "../../queries/tipoDocumentoQuery";
 
 interface RolSelectorProps {
+  type: string;
   value: string | null;
   setValue: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const RolSelector: React.FC<RolSelectorProps> = ({ value, setValue }) => {
-  const { data, loading, error } = useQuery(GET_ROLS);
+const RolSelector: React.FC<RolSelectorProps> = ({ type, value, setValue }) => {
+  let query_type : DocumentNode;
+  if (type === "rol")
+  {
+    query_type = GET_ROLS;
+  }
+  else if (type === "estadoCambioPartes")
+  {
+
+  }
+  else if (type === "tipoDocumento")
+  {
+    query_type = GET_TIPOS_DOCUMENTO;
+  }
+
+  const { data, loading, error } = useQuery(query_type!);
+  
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const options = data && data.rol ? data.rol.map((item: any) => (
-    <Combobox.Option value={item.nombre} key={item.rolId}>
-      {item.nombre}
-    </Combobox.Option>
-  )) : [];
+  let options = [];
+
+  if (type === "rol")
+  {
+    options = data && data.rol ? data.rol.map((item: any) => (
+      <Combobox.Option value={item.nombre} key={item.rolId}>
+        {item.nombre}
+      </Combobox.Option>
+    )) : [];  
+  }
+  else if (type === "estadoCambioPartes")
+  {
+
+  }
+  else if (type === "tipoDocumento")
+  {
+    options = data && data.rol ? data.rol.map((item: any) => (
+      <Combobox.Option aria-label={item.id} value={item.nombre} key={item.rolId}>
+        {item.nombre}
+      </Combobox.Option>
+    )) : [];  
+  }
+
 
   return (
     <div>

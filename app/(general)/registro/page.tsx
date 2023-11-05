@@ -152,7 +152,7 @@ function RegistroPage() {
           values={{ valueNames, valueLastName, valueEmail, valueTelephone, valueDocumento, valueStreet, valueTipoDocumento}}
           setters={{ setValueNames, setValueLastName, setValueEmail, setValueTelephone, setValueDocumento, setValueStreet, setValueTipoDocumento}}
         />
-        <RolSelector value={valueRol} setValue={setValueRol} />
+        <RolSelector type="rol" value={valueRol} setValue={setValueRol} />
         <Button onClick={handleRegister}>Registrar usuario</Button>
       </Flex>
     </div>
