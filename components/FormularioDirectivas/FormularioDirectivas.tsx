@@ -12,10 +12,6 @@ import { fetchPersonData } from "../../external_apis/reniec";
 import InputFieldsDirectivas from "../InputFieldDirectivas/InputFieldDirectivas";
 
 function FormularioDirectivas() {
-    const {data : session} = useSession();
-    if (!session) {
-      redirect("/signIn")
-    }
     const [valueAdDirectiva, setValueAdDirectiva] = useState<string>("");
     const [valueDocumentoRef, setValueDocumentoRef] = useState<string>("");
     const [valueAdReemp, setValueAdReemp] = useState<string>("");
