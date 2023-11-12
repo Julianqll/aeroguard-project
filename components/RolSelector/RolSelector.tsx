@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { Combobox, InputBase, Input, useCombobox, Text } from "@mantine/core";
-import { GET_ROLS } from "../../queries/rolQuery";
+import { GET_ROL } from "../../queries/rolQuery";
 
 interface RolSelectorProps {
   value: string | null;
@@ -9,7 +9,7 @@ interface RolSelectorProps {
 }
 
 const RolSelector: React.FC<RolSelectorProps> = ({ value, setValue }) => {
-  const { data, loading, error } = useQuery(GET_ROLS);
+  const { data, loading, error } = useQuery(GET_ROL);
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
