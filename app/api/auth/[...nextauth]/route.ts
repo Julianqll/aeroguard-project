@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { SIGNIN_USER } from "../../../../queries/userQuery";
+import { SIGNIN_USER } from "../../../../queries/usuarioQuery";
 import { client } from "../../../../apolloClient";
 import bcrypt from "bcryptjs";
 

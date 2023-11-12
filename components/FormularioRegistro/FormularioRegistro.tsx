@@ -7,7 +7,7 @@ import { notifications } from "@mantine/notifications";
 import bcrypt from "bcryptjs";
 import { isValidDNI, isValidEmail, isValidPhone } from "../../utils/validators";
 import { fetchPersonData } from "../../external_apis/reniec";
-import { ADD_USER } from "../../queries/userQuery";
+import { INSERT_USUARIO } from "../../queries/usuarioQuery";
 import InputFields from "../InputFields/InputFields";
 import Selector from "../Selector/Selector";
 
@@ -20,7 +20,7 @@ function FormularioRegistro() {
     const [valueTelephone, setValueTelephone] = useState('');
     const [valueRol, setValueRol] = useState<string | null>(null);
     const [valueTipoDocumento, setValueTipoDocumento] = useState<string | null>(null);
-    const [addUser, { data, loading, error }] = useMutation(ADD_USER);
+    const [addUser, { data, loading, error }] = useMutation(INSERT_USUARIO);
 
     useEffect(() => {
       if (isValidDNI(valueDocumento)) {
