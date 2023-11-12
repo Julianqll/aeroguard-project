@@ -9,7 +9,7 @@ import { isValidDNI, isValidEmail, isValidPhone } from "../../utils/validators";
 import { fetchPersonData } from "../../external_apis/reniec";
 import { INSERT_USUARIO } from "../../queries/usuarioQuery";
 import InputFields from "../InputFields/InputFields";
-import RolSelector from "../RolSelector/RolSelector";
+import Selector from "../Selector/Selector";
 
 function FormularioRegistro() {
     const [valueNames, setValueNames] = useState('');
@@ -77,29 +77,6 @@ function FormularioRegistro() {
             const randomPassword = "123456"
             const hashedPassword = await bcrypt.hash(randomPassword, 10);
 
-            let valueTipoDocumentoFinal;
-            if (valueTipoDocumento === "DNI")
-            {
-              valueTipoDocumentoFinal = 1;
-            }
-            else if (valueTipoDocumento === "Carnet de Extranjeria")
-            {
-              valueTipoDocumentoFinal = 2;
-            }
-
-            let valueRolFinal;
-            if (valueRol === "Administrador")
-            {
-                valueRolFinal = 1;
-            }
-            else if (valueRol === "Técnico")
-            {
-                valueRolFinal = 2;
-            }
-            else if (valueRol === "Gestor Logístico")
-            {
-                valueRolFinal = 3;
-            }
             const user = {
               nombres: valueNames,
               apellidos: valueLastName,
@@ -107,10 +84,10 @@ function FormularioRegistro() {
               contrasena: hashedPassword,
               direccion: valueStreet,
               telefono: valueTelephone,
-              rolId: valueRolFinal,
+              idRol: valueRol,
               numeroDocumento: valueDocumento,
               estado: true,
-              tipoDocumento: valueTipoDocumentoFinal
+              tipoDocumento: valueTipoDocumento
             };
         
             try {
@@ -144,7 +121,7 @@ function FormularioRegistro() {
           values={{ valueNames, valueLastName, valueEmail, valueTelephone, valueDocumento, valueStreet, valueTipoDocumento}}
           setters={{ setValueNames, setValueLastName, setValueEmail, setValueTelephone, setValueDocumento, setValueStreet, setValueTipoDocumento}}
         />
-        <RolSelector value={valueRol} setValue={setValueRol} />
+        <Selector type="rol" value={valueRol} setValue={setValueRol} />
         <Button onClick={handleRegister}>Registrar usuario</Button>
       </Flex>
     </div>

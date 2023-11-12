@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TextInput, Flex } from "@mantine/core";
-import TipoDocumentoSelector from "../TipoDocumentoSelector/TipoDocumentoSelector";
+import Selector from "../Selector/Selector";
 
 interface InputFieldsProps {
   values: {
@@ -79,7 +79,7 @@ const InputFields: React.FC<InputFieldsProps> = ({ values, setters }) => {
             value={values.valueDocumento}
             onChange={(event) => setters.setValueDocumento(event.currentTarget.value)}
           />
-          <TipoDocumentoSelector value={values.valueTipoDocumento} setValue={setters.setValueTipoDocumento} />
+          <Selector type="tipoDocumento" value={values.valueTipoDocumento} setValue={setters.setValueTipoDocumento} />
           <TextInput
             label="Dirección"
             placeholder="Dirección de prueba"
