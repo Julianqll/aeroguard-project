@@ -1,8 +1,6 @@
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Fieldset, TextInput } from '@mantine/core';
+import { Button, Fieldset, TextInput } from '@mantine/core';
 import { DateTimePicker } from '@mantine/dates';
 
 export const FormularioInspeccion = () => {
@@ -23,8 +21,9 @@ export const FormularioInspeccion = () => {
      
       <TextInput label="Descripción" placeholder="Ingrese la descripción" mt="md" />
 
-      <TextInput label="Id-Asignacion" placeholder="ID-Asignación" mt="md" />
-    
+      <TextInput label="Id-Asignacion" placeholder="ID-Asignación" mt="md" /><br/>
+        
+    <Button variant="filled">Registrar</Button> 
     </Fieldset>
   );
 };

@@ -1,8 +1,6 @@
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Fieldset, TextInput } from '@mantine/core';
+import { Button, Fieldset, TextInput } from '@mantine/core';
 
 export const FormularioPiezas = () => {
   // You can use initialValues to set default values for the fields
@@ -28,7 +26,9 @@ export const FormularioPiezas = () => {
       <TextInput label="Stock" placeholder="Ingrese el stock" mt="md" />
 
       {/* Backorder */}
-      <TextInput label="Backorder" placeholder="Ingrese el backorder" mt="md" />
+      <TextInput label="Backorder" placeholder="Ingrese el backorder" mt="md" /><br/>
+      
+      <Button variant="filled">Registrar</Button> 
     </Fieldset>
   );
 };

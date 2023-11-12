@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fieldset, TextInput } from '@mantine/core';
+import { Button, Fieldset, TextInput } from '@mantine/core';
 import { DateTimePicker } from '@mantine/dates';
 
 export const FormularioCambioPiezas = () => {
@@ -26,8 +26,9 @@ export const FormularioCambioPiezas = () => {
       {/* <DateTimePicker label ="Fecha" placeholder='Digite la fecha'></DateTimePicker> */}
 
       
-      <TextInput label="ID-Asignacion-Avion" placeholder="ID-Asignacion-Avion" mt="md" />
-    
+      <TextInput label="ID-Asignacion-Avion" placeholder="ID-Asignacion-Avion" mt="md" /><br/>
+      
+      <Button variant="filled">Registrar</Button> 
     </Fieldset>
   );
 };
