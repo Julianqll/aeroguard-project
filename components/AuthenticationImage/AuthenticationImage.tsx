@@ -18,7 +18,7 @@ import { signIn } from 'next-auth/react';
 export function AuthenticationImage() {
     const [valueEmail, setValueEmail] = useState('');
     const [valuePassword, setValuePassword] = useState('');
-
+    
     const handleLogin = async () => {
       if (!valueEmail || !valuePassword) {
         notifications.show({
