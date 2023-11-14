@@ -14,6 +14,7 @@ import classes from './CollapseDesktop.module.css';
 import { UserButton } from '../UserButton/UserButton';
 import { useSession } from 'next-auth/react';
 import { Session } from 'next-auth';
+import { ActionToggle } from '../ActionToggle/ActionToggle';
 
 
   const mockdata_admin = [
@@ -72,17 +73,20 @@ export function CollapseDesktop({
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
-          <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
+        <Group h="100%" px="md" justify='space-between'>
+          <Group>
+            <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
+            <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
             <Text<'a'>
-              component="a"
-              href="/dashboard"
+                component="a"
+                href="/dashboard"
             >
-            <Title order={2} ta="center">
-              AeroGuard
-            </Title>
+              <Title order={2} ta="center">
+                AeroGuard
+              </Title>
             </Text>
+          </Group>
+          <ActionToggle/>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="sm">
