@@ -4,50 +4,63 @@ import { AppShell, Burger, Group, ScrollArea, Skeleton, Title } from '@mantine/c
 import {
     IconNotes,
     IconCalendarStats,
-    IconGauge,
-    IconPresentationAnalytics,
+    IconPlaneInflight,
+    IconUsers,
+    IconTable,
+    IconFilePencil
   } from '@tabler/icons-react';
 import { LinksGroup } from '../NavbarLinksGroup/NavbarLinksGroup';
 import classes from './CollapseDesktop.module.css';
 import { UserButton } from '../UserButton/UserButton';
+import { useSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 
 
-const mockdata = [
-    { label: 'Aviones', icon: IconGauge },
-    {
-      label: 'Reportes',
-      icon: IconNotes,
-      initiallyOpened: false,
-      links: [
-        { label: 'Opcion 1', link: '/' },
-        { label: 'Opcion 2', link: '/' },
-        { label: 'Opcion 3', link: '/' },
-      ],
-    },
-    {
-      label: 'Directivas',
-      icon: IconCalendarStats,
-      links: [
-        { label: 'Opcion 1', link: '/' },
-        { label: 'Opcion 2', link: '/' },
-        { label: 'Opcion 3', link: '/' },
-        { label: 'Opcion 4', link: '/' },
-        { label: 'Opcion 5', link: '/' },
-      ],
-    },
-    { label: 'Usuarios', icon: IconPresentationAnalytics },
+  const mockdata_admin = [
+    { label: 'Aviones', icon: IconPlaneInflight },
+    { label: 'Reportes', icon: IconNotes },
+    { label: 'Directivas', icon: IconCalendarStats },
+    { label: 'Usuarios', icon: IconUsers },
   ];
 
-  
+  const mockdata_gestor = [
+    { label: 'Inventario', icon: IconTable },
+    { label: 'Solicitudes', icon: IconFilePencil },
+  ];
+
+  const mockdata_tecnico = [
+    { label: 'Aviones', icon: IconPlaneInflight },
+    { label: 'Reportes', icon: IconNotes },
+    { label: 'Directivas', icon: IconCalendarStats },
+  ];
+
 export function CollapseDesktop({
     children,
+    data
   }: {
-    children: React.ReactNode
+    children: React.ReactNode,
+    data: Session | null;
   }) {
+
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+  let mockdata;
+
+  if (data?.user.rol == 1)
+  {
+    mockdata = mockdata_admin;
+  }
+  else if (data?.user.rol == 2)
+  {
+    mockdata = mockdata_tecnico;
+
+  }
+  else if (data?.user.rol == 4)
+  {
+    mockdata = mockdata_gestor;
+  }
+  const links = mockdata!.map((item) => <LinksGroup {...item} key={item.label} />);
 
   return (
     <AppShell

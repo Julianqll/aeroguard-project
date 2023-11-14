@@ -1,11 +1,14 @@
+import { getServerSession } from "next-auth";
 import { CollapseDesktop } from "../../components/CollapseDesktop/CollapseDesktop";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
-export default function GeneralLayout({
+export default async function GeneralLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode
 }) {
+  const session = await getServerSession(authOptions);
   return (
-    <CollapseDesktop>{children}</CollapseDesktop>
+    <CollapseDesktop data={session}>{children}</CollapseDesktop>
   );
 }

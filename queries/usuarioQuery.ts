@@ -62,6 +62,7 @@ query Login($email: String!) {
     apellidos
     correo
     contrasena
+    idRol
   }
 }
 `;

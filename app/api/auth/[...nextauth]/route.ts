@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/client";
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { SIGNIN_USER } from "../../../../queries/usuarioQuery";
 import { client } from "../../../../apolloClient";
 import bcrypt from "bcryptjs";
+import { JWT } from "next-auth/jwt";
 
-export const authOptions = {
-  
+export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
           // The name to display on the sign in form (e.g. "Sign in with...")
@@ -35,7 +35,8 @@ export const authOptions = {
                   const user = {
                     id: data.usuario[0].id, // Assuming your user has an id field.
                     name: `${data.usuario[0].nombres} ${data.usuario[0].apellidos}`,
-                    email: data.usuario[0].correo
+                    email: data.usuario[0].correo,
+                    rol: data.usuario[0].idRol,
                   };
                   return user;
                 }else {
@@ -49,10 +50,32 @@ export const authOptions = {
               return null;
             }
           }
-          
-          
         })
-      ]
+      ],
+      callbacks: {
+        async jwt({ token, user, session }:any) {
+          if (user) {
+            return {
+              ...token,
+              rol: user.rol,
+            };
+          }
+          return token;
+        },
+      
+        async session({ session, token, user }) {
+          return {
+            ...session,
+            user :{
+              ...session.user,
+              rol: token.rol,
+            }
+          };
+          return session;
+        },
+      },
+      secret: process.env.NEXTAUTH_SECRET,
+      
 }
 
 export const handler = NextAuth(authOptions);
