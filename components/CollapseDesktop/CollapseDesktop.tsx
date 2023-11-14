@@ -18,7 +18,8 @@ import { Session } from 'next-auth';
 
   const mockdata_admin = [
     { label: 'Aviones', icon: IconPlaneInflight, link: '/aviones'},
-    { label: 'Reportes', icon: IconNotes , link: '/reportes'},
+    { label: 'Reportes de Inspecciones', icon: IconNotes , link: '/reportes-inspecciones'},
+    { label: 'Reportes de Cambios', icon: IconNotes , link: '/reportes-cambios-piezas'},
     { label: 'Usuarios', icon: IconUsers, link: '/usuarios'},
   ];
 
@@ -29,8 +30,8 @@ import { Session } from 'next-auth';
 
   const mockdata_tecnico = [
     { label: 'Aviones', icon: IconPlaneInflight, link: '/aviones'},
-    { label: 'Reportes', icon: IconNotes , link: '/reportes'},
-  ];
+    { label: 'Reportes de Inspecciones', icon: IconNotes , link: '/reportes-inspecciones'},
+    { label: 'Reportes de Cambios', icon: IconNotes , link: '/reportes-cambios-piezas'},  ];
 
 export function CollapseDesktop({
     children,

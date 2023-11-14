@@ -28,7 +28,7 @@ mutation DeleteReporteInspeccion($_eq: Int) {
   }
 `;
 
-export const INSERT_REPORTE_INSPECCION = gql`
+export const INSERT_REPORTE_INSPECCION= gql`
 mutation InsertReporteInspeccion($object: reporteInspeccion_insert_input = {}) {
     insert_reporteInspeccion_one(object: $object) {
       idEstadoInsp
@@ -36,6 +36,7 @@ mutation InsertReporteInspeccion($object: reporteInspeccion_insert_input = {}) {
       idAsignacionAvion
       fechaInsp
     }
+  }
 `;
 
 export const UPDATE_REPORTE_INSPECCION = gql`
