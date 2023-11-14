@@ -2,8 +2,8 @@
 
 import UserListView from "../../../components/UserListView/UserListView";
 
-export default function UsuariosPage() {
+export default function AvionesPage() {
     return (
-        <UserListView type="usuarios"></UserListView>
+        <UserListView type="aviones"></UserListView>
     );
 }

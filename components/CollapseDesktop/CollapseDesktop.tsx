@@ -19,7 +19,6 @@ import { Session } from 'next-auth';
   const mockdata_admin = [
     { label: 'Aviones', icon: IconPlaneInflight, link: '/aviones'},
     { label: 'Reportes', icon: IconNotes , link: '/reportes'},
-    { label: 'Directivas', icon: IconCalendarStats, link: '/directivas' },
     { label: 'Usuarios', icon: IconUsers, link: '/usuarios'},
   ];
 
@@ -31,7 +30,6 @@ import { Session } from 'next-auth';
   const mockdata_tecnico = [
     { label: 'Aviones', icon: IconPlaneInflight, link: '/aviones'},
     { label: 'Reportes', icon: IconNotes , link: '/reportes'},
-    { label: 'Directivas', icon: IconCalendarStats , link: '/directivas'},
   ];
 
 export function CollapseDesktop({
@@ -60,7 +58,7 @@ export function CollapseDesktop({
   {
     mockdata = mockdata_gestor;
   }
-  const links = mockdata!.map((item) => <LinksGroup {...item} key={item.label} />);
+  const links = mockdata?.map((item) => <LinksGroup {...item} key={item.label} />);
 
   return (
     <AppShell
