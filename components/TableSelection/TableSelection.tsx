@@ -1,7 +1,11 @@
 import cx from 'clsx';
 import { useState } from 'react';
-import { Table, Checkbox, ScrollArea, Group, Avatar, Text, rem } from '@mantine/core';
+import { Table, Checkbox, ScrollArea, Group, Avatar, Text, rem, Button } from '@mantine/core';
 import classes from './TableSelection.module.css';
+import { IconFileInfo } from '@tabler/icons-react';
+import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+
 
 export function TableSelection({
   type,
@@ -9,22 +13,32 @@ export function TableSelection({
 }: any) {
   let rows = [];
   let headers: any[] = [];
+  const router = useRouter();
+
   if (type === 'aviones')
   {
-    headers = ["Numero de Registro","Numero de Serie", "Certificado"];
+    headers = ["Numero de Registro","Numero de Serie", "Certificado", "Información"];
      rows = data.avion!.map((item:any) => {
       return (
-        <Table.Tr key={item.idUsuario}>
+        <Table.Tr key={item.idAvion}>
           <Table.Td>
             <Group gap="sm">
-              <Avatar size={26} radius={26} />
               <Text size="sm" fw={500}>
-                {item.nombres} {item.apellidos}
+                {item.numRegistro}
               </Text>
             </Group>
           </Table.Td>
-          <Table.Td>{item.correo}</Table.Td>
-          <Table.Td>{item.numeroDocumento}</Table.Td>
+          <Table.Td>{item.numSerie}</Table.Td>
+          <Table.Td>{item.tipoCertificado}</Table.Td>
+          <Table.Td>
+            <Button 
+              ml={15} 
+              rightSection={<IconFileInfo size={14} />} 
+              onClick={() => router.push('/avion')}
+              >
+                Información
+            </Button>
+          </Table.Td>
         </Table.Tr>
       );
     });
