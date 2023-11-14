@@ -1,6 +1,6 @@
 "use client";
 import { useDisclosure } from '@mantine/hooks';
-import { AppShell, Burger, Group, ScrollArea, Skeleton, Title } from '@mantine/core';
+import { AppShell, Burger, Group, ScrollArea, Skeleton, Title, Text } from '@mantine/core';
 import {
     IconNotes,
     IconCalendarStats,
@@ -17,21 +17,21 @@ import { Session } from 'next-auth';
 
 
   const mockdata_admin = [
-    { label: 'Aviones', icon: IconPlaneInflight },
-    { label: 'Reportes', icon: IconNotes },
-    { label: 'Directivas', icon: IconCalendarStats },
-    { label: 'Usuarios', icon: IconUsers },
+    { label: 'Aviones', icon: IconPlaneInflight, link: '/aviones'},
+    { label: 'Reportes', icon: IconNotes , link: '/reportes'},
+    { label: 'Directivas', icon: IconCalendarStats, link: '/directivas' },
+    { label: 'Usuarios', icon: IconUsers, link: '/usuarios'},
   ];
 
   const mockdata_gestor = [
-    { label: 'Inventario', icon: IconTable },
-    { label: 'Solicitudes', icon: IconFilePencil },
+    { label: 'Inventario', icon: IconTable , link: '/inventario'},
+    { label: 'Solicitudes', icon: IconFilePencil, link: '/solicitudes'},
   ];
 
   const mockdata_tecnico = [
-    { label: 'Aviones', icon: IconPlaneInflight },
-    { label: 'Reportes', icon: IconNotes },
-    { label: 'Directivas', icon: IconCalendarStats },
+    { label: 'Aviones', icon: IconPlaneInflight, link: '/aviones'},
+    { label: 'Reportes', icon: IconNotes , link: '/reportes'},
+    { label: 'Directivas', icon: IconCalendarStats , link: '/directivas'},
   ];
 
 export function CollapseDesktop({
@@ -76,9 +76,14 @@ export function CollapseDesktop({
         <Group h="100%" px="md">
           <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
           <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
-          <Title order={2} ta="center">
-            AeroGuard
-          </Title>
+            <Text<'a'>
+              component="a"
+              href="/dashboard"
+            >
+            <Title order={2} ta="center">
+              AeroGuard
+            </Title>
+            </Text>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="sm">

@@ -6,11 +6,12 @@ import classes from './NavbarLinksGroup.module.css';
 interface LinksGroupProps {
   icon: React.FC<any>;
   label: string;
+  link: string;
   initiallyOpened?: boolean;
   links?: { label: string; link: string }[];
 }
 
-export function LinksGroup({ icon: Icon, label, initiallyOpened, links }: LinksGroupProps) {
+export function LinksGroup({ icon: Icon, label, link, initiallyOpened, links }: LinksGroupProps) {
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
   const items = (hasLinks ? links : []).map((link) => (
@@ -29,12 +30,20 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }: LinksG
     <>
       <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
         <Group justify="space-between" gap={0}>
-          <Box style={{ display: 'flex', alignItems: 'center' }}>
-            <ThemeIcon variant="light" size={30}>
-              <Icon style={{ width: rem(18), height: rem(18) }} />
-            </ThemeIcon>
-            <Box ml="md">{label}</Box>
-          </Box>
+          <Text<'a'>
+              component="a"
+              href={link}
+              key={label}
+            >
+            <Box style={{ display: 'flex', alignItems: 'center' }}>
+              <ThemeIcon variant="light" size={30}>
+                <Icon style={{ width: rem(18), height: rem(18) }} />
+              </ThemeIcon>
+                <Box ml="md">
+                  {label}
+                </Box>
+            </Box>
+          </Text>
           {hasLinks && (
             <IconChevronRight
               className={classes.chevron}
@@ -56,6 +65,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }: LinksG
 const mockdata = {
   label: 'Releases',
   icon: IconCalendarStats,
+  link:"",
   links: [
     { label: 'Upcoming releases', link: '/' },
     { label: 'Previous releases', link: '/' },
