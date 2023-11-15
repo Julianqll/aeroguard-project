@@ -38,7 +38,7 @@ export default function AirplaneModelView({id} :any) {
             </Grid>
             <div>
                 <Text size="xl" className={classes.header}>Directivas registradas</Text>
-                <Grid>
+                <Grid mb={30}>
                     <Grid.Col span={4}>
                         <ImageCard
                             image="https://upload.wikimedia.org/wikipedia/commons/c/c3/Hercules.propeller.arp.jpg"
