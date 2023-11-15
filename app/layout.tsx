@@ -7,6 +7,7 @@ import { theme } from "../theme";
 import SessionProvider from "../components/SessionProvider";
 import { Notifications } from '@mantine/notifications';
 import { ProviderBack } from "../components/ProviderBack";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 export const metadata = {
   title: "AeroGuard",
@@ -15,7 +16,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: any }) {
 
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <head>

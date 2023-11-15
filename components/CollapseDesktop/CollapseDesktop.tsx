@@ -35,28 +35,27 @@ import { ActionToggle } from '../ActionToggle/ActionToggle';
     { label: 'Reportes de Cambios', icon: IconNotes , link: '/reportes-cambios-piezas'},  ];
 
 export function CollapseDesktop({
-    children,
-    data
+    children
   }: {
-    children: React.ReactNode,
-    data: Session | null;
+    children: React.ReactNode  
   }) {
 
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
+  const {data : session} = useSession();
   let mockdata;
 
-  if (data?.user.rol == 1)
+  if (session?.user.rol == 1)
   {
     mockdata = mockdata_admin;
   }
-  else if (data?.user.rol == 2)
+  else if (session?.user.rol == 2)
   {
     mockdata = mockdata_tecnico;
 
   }
-  else if (data?.user.rol == 4)
+  else if (session?.user.rol == 4)
   {
     mockdata = mockdata_gestor;
   }
