@@ -34,7 +34,7 @@ export function TableSelection({
             <Button 
               ml={15} 
               rightSection={<IconFileInfo size={14} />} 
-              onClick={() => router.push('/avion')}
+              onClick={() => router.push(`/avion/${item.idAvion}`)}
               >
                 Información
             </Button>
