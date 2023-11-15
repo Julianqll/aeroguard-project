@@ -2,17 +2,20 @@ import { gql } from '@apollo/client';
 
 export const GET_REPORTE_CAMBIO_PIEZAS = gql`
 query ReporteCambioPiezasQuery {
-    reporteCambioPiezas {
-      accionCorrectiva
-      cantidad
-      discrepancia
-      fechaCambio
-      idAsignacionAvion
-      idEstadoCambio
-      idPieza
-      idReporteCamP
+  reporteCambioPiezas {
+    accionCorrectiva
+    cantidad
+    discrepancia
+    fechaCambio
+    idAsignacionAvion
+    idEstadoCambio
+    idPieza
+    idReporteCamP
+    pieza {
+      nombre
     }
-  }  
+  }
+}
   `;
   
   export const DELETE_REPORTE_CAMBIO_PIEZAS = gql`

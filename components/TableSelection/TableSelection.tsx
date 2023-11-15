@@ -1,77 +1,121 @@
 import cx from 'clsx';
 import { useState } from 'react';
-import { Table, Checkbox, ScrollArea, Group, Avatar, Text, rem } from '@mantine/core';
+import { Table, Checkbox, ScrollArea, Group, Avatar, Text, rem, Button } from '@mantine/core';
 import classes from './TableSelection.module.css';
+import { IconFileInfo } from '@tabler/icons-react';
+import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-const data = [
-  {
-    id: '1',
-    avatar:
-      'https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80',
-    name: 'Robert Wolfkisser',
-    job: 'Engineer',
-    email: 'rob_wolf@gmail.com',
-  },
-  {
-    id: '2',
-    avatar:
-      'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80',
-    name: 'Jill Jailbreaker',
-    job: 'Engineer',
-    email: 'jj@breaker.com',
-  },
-  {
-    id: '3',
-    avatar:
-      'https://images.unsplash.com/photo-1632922267756-9b71242b1592?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80',
-    name: 'Henry Silkeater',
-    job: 'Designer',
-    email: 'henry@silkeater.io',
-  },
-  {
-    id: '4',
-    avatar:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80',
-    name: 'Bill Horsefighter',
-    job: 'Designer',
-    email: 'bhorsefighter@gmail.com',
-  },
-  {
-    id: '5',
-    avatar:
-      'https://images.unsplash.com/photo-1630841539293-bd20634c5d72?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80',
-    name: 'Jeremy Footviewer',
-    job: 'Manager',
-    email: 'jeremy@foot.dev',
-  },
-];
 
-export function TableSelection() {
-  const rows = data.map((item) => {
+export function TableSelection({
+  type,
+  data
+}: any) {
+  let rows = [];
+  let headers: any[] = [];
+  const router = useRouter();
+
+  if (type === 'aviones')
+  {
+    headers = ["Numero de Registro","Numero de Serie", "Certificado", "Información"];
+     rows = data.avion!.map((item:any) => {
+      return (
+        <Table.Tr key={item.idAvion}>
+          <Table.Td>
+            <Group gap="sm">
+              <Text size="sm" fw={500}>
+                {item.numRegistro}
+              </Text>
+            </Group>
+          </Table.Td>
+          <Table.Td>{item.numSerie}</Table.Td>
+          <Table.Td>{item.tipoCertificado}</Table.Td>
+          <Table.Td>
+            <Button 
+              ml={15} 
+              rightSection={<IconFileInfo size={14} />} 
+              onClick={() => router.push(`/avion/${item.idAvion}`)}
+              >
+                Información
+            </Button>
+          </Table.Td>
+        </Table.Tr>
+      );
+    });
+  }
+  else if (type === 'usuarios')
+  {
+    headers = ["Usuario","Correo", "Documento"];
+    rows = data.usuario!.map((item:any) => {
+      return (
+        <Table.Tr key={item.idUsuario}>
+          <Table.Td>
+            <Group gap="sm">
+              <Avatar size={26} radius={26} />
+              <Text size="sm" fw={500}>
+                {item.nombres} {item.apellidos}
+              </Text>
+            </Group>
+          </Table.Td>
+          <Table.Td>{item.correo}</Table.Td>
+          <Table.Td>{item.numeroDocumento}</Table.Td>
+        </Table.Tr>
+      );
+    });
+  }
+  else if (type === 'reportes_inspecciones')
+  {
+    headers = ["Discrepancia","Accion Correctiva", "Referencia"];
+    rows = data.reporteInspeccion!.map((item:any) => {
+      return (
+        <Table.Tr key={item.idReporteInspeccion}>
+          <Table.Td>
+            <Group gap="sm">
+              <Avatar size={26} radius={26} />
+              <Text size="sm" fw={500}>
+                {item.discrepancia}
+              </Text>
+            </Group>
+          </Table.Td>
+          <Table.Td>{item.accionCorrectiva}</Table.Td>
+          <Table.Td>{item.referencia}</Table.Td>
+        </Table.Tr>
+      );
+    });
+  }
+  else if (type === 'reportes_cambios')
+  {
+    headers = ["Discrepancia","Accion Correctiva", "Pieza"];
+    rows = data.reporteCambioPiezas!.map((item:any) => {
+      return (
+        <Table.Tr key={item.idReporteCamP}>
+          <Table.Td>
+            <Group gap="sm">
+              <Avatar size={26} radius={26} />
+              <Text size="sm" fw={500}>
+                {item.discrepancia}
+              </Text>
+            </Group>
+          </Table.Td>
+          <Table.Td>{item.accionCorrectiva}</Table.Td>
+          <Table.Td>{item.pieza.nombre}</Table.Td>
+        </Table.Tr>
+      );
+    });
+  }
+
+
+  let theaders = headers.map((item:any) => {
     return (
-      <Table.Tr key={item.id}>
-        <Table.Td>
-          <Group gap="sm">
-            <Avatar size={26} src={item.avatar} radius={26} />
-            <Text size="sm" fw={500}>
-              {item.name}
-            </Text>
-          </Group>
-        </Table.Td>
-        <Table.Td>{item.email}</Table.Td>
-        <Table.Td>{item.job}</Table.Td>
-      </Table.Tr>
+        <Table.Th>{item}</Table.Th>
     );
   });
-
   return (
     <ScrollArea>
       <Table miw={800} verticalSpacing="sm">
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>User</Table.Th>
-            <Table.Th>Email</Table.Th>
-            <Table.Th>Job</Table.Th>
+            {theaders}
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>

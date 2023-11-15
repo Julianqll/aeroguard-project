@@ -54,3 +54,15 @@ mutation UpdateUsuario($idUsuario: Int!) {
     }
   }
 `;
+
+export const SIGNIN_USER = gql`
+query Login($email: String!) {
+  usuario(where: {correo: {_eq: $email}}) {
+    nombres
+    apellidos
+    correo
+    contrasena
+    idRol
+  }
+}
+`;

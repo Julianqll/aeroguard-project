@@ -16,6 +16,26 @@ query AvionQuery {
   }
   `;
   
+  export const GET_AVION_QUERY_BY_ID = gql`
+  query AvionQuery($_eq: Int) {
+    avion(where: {idAvion: {_eq: $_eq}}) {
+      anoServicio
+      diaFabricacion
+      idAvion
+      numRegistro
+      numSerie
+      tipoCertificado
+      vidaActual
+      vidaLimite
+      fabricante {
+        idFabricante
+        nombre
+      }
+    }
+  }
+  
+  `;
+
   export const DELETE_AVION= gql`
   mutation DeleteAvion($_eq: Int) {
     delete_avion(where: {idAvion: {_eq: $_eq}}) {
