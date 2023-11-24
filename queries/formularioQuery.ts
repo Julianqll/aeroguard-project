@@ -39,7 +39,22 @@ query MyQuery3($idFormulario: Int!) {
 
 export const QUERY_FORMULARIO_BY_AVION = gql`
 query MyQueryAvion($_eq: Int) {
-  formulario(where: {idAvion: {_eq: $_eq}}) {
+  formulario(where: {idAvion: {_eq: $_eq}, estado: {_neq: "Pendiente"}}) {
+    idFormulario
+    nombre
+    tipoFormulario {
+      tipoFormulario
+    }
+    estado
+    diagnostico
+  }
+}
+`;
+
+export const QUERY_FORMULARIO_BY_AVION_PENDIENTE = gql`
+query MyQueryAvion($_eq: Int) {
+  formulario(where: {idAvion: {_eq: $_eq}, estado: {_eq: "Pendiente"}}) {
+    idFormulario
     nombre
     tipoFormulario {
       tipoFormulario

@@ -189,6 +189,35 @@ export function TableSelection({
       );
     });
   }
+  else if(type === "formularios_avion")
+  {
+    headers = ["Tipo Formulario","Nombre", "Id Avion", "Fecha"];
+    rows = data?.formulario?.map((item:any) => {
+      return (
+        <Table.Tr key={item.idFormulario}>
+          <Table.Td>
+            <Group gap="sm">
+              <Avatar size={26} radius={26} />
+              <Text size="sm" fw={500}>
+                {item.tipoFormulario.tipoFormulario}
+              </Text>
+            </Group>
+          </Table.Td>
+          <Table.Td>{item.nombre}</Table.Td>
+          <Table.Td>{item.idAvion}</Table.Td>
+          <Table.Td>
+          <Button 
+              ml={15} 
+              rightSection={<IconFileInfo size={14} />} 
+              onClick={() => router.push(`/formulario/${item.idFormulario}`)}
+              >
+                Ver más
+            </Button>
+          </Table.Td>
+        </Table.Tr>
+      );
+    });
+  }
 
   let theaders = headers.map((item:any) => {
     return (

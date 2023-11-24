@@ -1,30 +1,24 @@
-import { Group, Paper, SimpleGrid, Text } from '@mantine/core';
+import { Button, Group, Paper, SimpleGrid, Text } from '@mantine/core';
 import {
-  IconUserPlus,
-  IconDiscount2,
-  IconReceipt2,
-  IconCoin,
-  IconArrowUpRight,
-  IconArrowDownRight,
+  IconEngine
 } from '@tabler/icons-react';
 import classes from './StatsGrid.module.css';
+import { useRouter } from 'next/navigation';
 
-const icons = {
-  user: IconUserPlus,
-  discount: IconDiscount2,
-  receipt: IconReceipt2,
-  coin: IconCoin,
-};
 
-const data = [
-  { title: 'Directivas', icon: 'receipt',  value: 'Completado' },
-  { title: 'Inspección', icon: 'coin',  value: 'Pendiente' },
-  { title: 'Cambio', icon: 'discount',  value: 'Pendiente' },
-] as const;
 
-export function StatsGrid() {
+export function StatsGrid(id:number) {
+
+  const router = useRouter();
+
+  const data = [
+    { title: 'Directivas', icon: 'receipt',  value: 'Completado' , link:`/directiva/${id}`},
+    { title: 'Inspección', icon: 'coin',  value: 'Pendiente' ,  link:`/inspeccion/${id}`},
+    { title: 'Cambio', icon: 'discount',  value: 'Pendiente' ,  link:`/cambio/${id}`},
+  ] as const;
+
   const stats = data.map((stat) => {
-    const Icon = icons[stat.icon];
+    const Icon = IconEngine;
 
     return (
       <Paper withBorder p="md" radius="md" key={stat.title}>
@@ -42,6 +36,12 @@ export function StatsGrid() {
         <Text fz="xs" c="dimmed" mt={7}>
           Procedimiento
         </Text>
+        <Button 
+              ml={15} 
+              onClick={() => router.push(stat.link)}
+              >
+                Ver más
+        </Button>
       </Paper>
     );
   });

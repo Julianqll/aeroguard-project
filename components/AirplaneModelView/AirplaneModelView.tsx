@@ -15,7 +15,7 @@ import { INSERT_ASIGNACION } from '../../queries/asignacionAvionQuery';
 import { notifications } from '@mantine/notifications';
 import { client } from '../../apolloClient';
 import { useSession } from 'next-auth/react';
-import { QUERY_FORMULARIO_BY_AVION } from '../../queries/formularioQuery';
+import { QUERY_FORMULARIO_BY_AVION, QUERY_FORMULARIO_BY_AVION_PENDIENTE } from '../../queries/formularioQuery';
 import { StatsGrid } from '../StatsGrid/StatsGrid';
 
 export default function AirplaneModelView({id} :any) {
@@ -36,6 +36,9 @@ export default function AirplaneModelView({id} :any) {
 
     const [addAsignacion, { data:asignacionData, loading:asignacionLoading, error:asignacionError }] = useMutation(INSERT_ASIGNACION);
 
+    const { data:avionFormDataPending, loading:loadingAvionFormPending, error: errorAvionFormPending } = useQuery(QUERY_FORMULARIO_BY_AVION_PENDIENTE, {
+        variables: { _eq:id },
+    });
     const { data:avionFormData, loading:loadingAvionForm, error: errorAvionForm } = useQuery(QUERY_FORMULARIO_BY_AVION, {
         variables: { _eq:id },
     });
@@ -171,8 +174,8 @@ export default function AirplaneModelView({id} :any) {
                 </Grid>
             </div>
             <div>
-                <Text mt={"30px"} size="xl" className={classes.header}>Últimas reportes registrados</Text>
-                <TableReviews></TableReviews>
+            <Text mt={"30px"} size="xl" className={classes.header}>Historial de formularios</Text>
+                <TableSelection type="formularios_avion" data={avionFormData}></TableSelection>
             </div>
             </>
             :
@@ -180,12 +183,12 @@ export default function AirplaneModelView({id} :any) {
             <div>
                 <Text mt={"30px"} size="xl" className={classes.header}>Formulario Pendiente</Text>
                 {loadingAvionForm ? <div>Cargando contenido...</div> : null}
-                {avionFormData?.formulario[0].nombre}
-                <StatsGrid></StatsGrid>
+                {avionFormDataPending?.formulario[0].nombre}
+                {StatsGrid(avionFormDataPending?.formulario[0].idFormulario)}
             </div>
             <div>
-                <Text mt={"30px"} size="xl" className={classes.header}>Historial de formularios</Text>
-                <TableReviews></TableReviews>
+            <Text mt={"30px"} size="xl" className={classes.header}>Historial de formularios</Text>
+                <TableSelection type="formularios_avion" data={avionFormData}></TableSelection>
             </div>
             <div>
                 <Text size="xl" className={classes.header}>Historial de Directivas</Text>
