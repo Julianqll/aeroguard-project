@@ -11,62 +11,29 @@ import { isValidDNI } from "../../utils/validators";
 import { fetchPersonData } from "../../external_apis/reniec";
 import InputFieldsDirectivas from "../InputFieldDirectivas/InputFieldDirectivas";
 
-function FormularioDirectivas() {
-    const [valueAdDirectiva, setValueAdDirectiva] = useState<string>("");
-    const [valueDocumentoRef, setValueDocumentoRef] = useState<string>("");
-    const [valueAdReemp, setValueAdReemp] = useState<string>("");
-    const [valueAdDescrip, setValueAdDescrip] = useState<string>("");
-    const [valueDocumInstruc, setValueDocumInstruc] = useState<string>("");
-    const [valueIntervalo, setValueIntervalo] = useState<string>("");
-    const [valueFecha, setValueFecha] = useState<Date>(new Date());
-    const [valueNames, setValueNames] = useState('');
-    const [valueLastName, setValueLastName] = useState('');
-    const [addTipoDirectiva, { data, loading, error }] = useMutation(ADD_TIPO_DIRECTIVA);
-  
-
-  const handleRegister = async () => {
-    if (!valueAdDirectiva || !valueDocumentoRef || !valueAdReemp || !valueAdDescrip || !valueDocumInstruc || !valueIntervalo || !valueFecha) {
-        notifications.show({
-            color: 'red',
-            title: 'Completar todos los campos',
-            message: 'Por favor completa todos los campos',
-            icon: <IconX size="1rem" />,
-            autoClose: false
-          });
-    }
-        else {
-
-        const directiva = {
-            //nombreTipoDirectiva: valueNombreDirectiva,
-            //descripTipoDirectiva: valueDescripcionDirectiva,
-        };
-    
-        try {
-            const response = await addTipoDirectiva({ variables: { input: directiva } });
-            notifications.show({
-            color: 'green',
-            title: 'Tipo Directiva Registrada',
-            message: <>
-            La directiva {response.data.insert_tipoDirectiva_one.nombreTipoDirectiva} se registró con éxito
-            </>,
-            icon: <IconCheck size="1rem" />,
-            autoClose: false
-            });
-        } catch (error) {
-            console.log(error);
-            notifications.show({
-                color: 'red',
-                title: 'Error en el registro',
-                message: 'Hubo un error registrando la directiva',
-                icon: <IconX size="1rem" />,
-                autoClose: false
-                });
-        }    
-    }
+interface FormularioDirectivasProps {
+  nombre: string;
+  values: {
+    valueAdDirectiva: string;
+    valueDocumentoRef: string;
+    valueAdReemp: string;
+    valueAdDescrip: string;
+    valueDocumInstruc: string;
+    valueIntervalo: string;
+    valueFecha: Date;
   };
+  setters: {
+    setValueAdDirectiva: React.Dispatch<React.SetStateAction<string>>;
+    setValueDocumentoRef: React.Dispatch<React.SetStateAction<string>>;
+    setValueAdReemp: React.Dispatch<React.SetStateAction<string>>;
+    setValueAdDescrip: React.Dispatch<React.SetStateAction<string>>;
+    setValueDocumInstruc: React.Dispatch<React.SetStateAction<string>>;
+    setValueIntervalo: React.Dispatch<React.SetStateAction<string>>;
+    setValueFecha: React.Dispatch<React.SetStateAction<Date>>;
+  };
+}
 
-  
-
+const FormularioDirectivas: React.FC<FormularioDirectivasProps> = ({ nombre, values, setters }) => {
   return (
     <div>
       <Flex mt={50} direction="column" align="center" style={{ gap: "30px" }}>
@@ -74,13 +41,12 @@ function FormularioDirectivas() {
             size="xl"
             fw={500}
         >
-            Formulario de Directivas
+            Formulario de Directiva - {nombre}
         </Text>
         <InputFieldsDirectivas
-            values={{valueAdDirectiva, valueDocumentoRef, valueAdReemp, valueAdDescrip, valueDocumInstruc, valueIntervalo, valueFecha}}
-            setters={{setValueAdDirectiva, setValueDocumentoRef, setValueAdReemp, setValueAdDescrip, setValueDocumInstruc, setValueIntervalo, setValueFecha}}
+            values={values}
+            setters={setters}
         />
-        <Button onClick={handleRegister}>Registrar nueva directiva</Button>
       </Flex>
     </div>
   );

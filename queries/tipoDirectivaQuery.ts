@@ -3,8 +3,9 @@ import { gql } from '@apollo/client';
 export const GET_TIPOS_DIRECTIVA = gql`
 query GetTiposDirectiva {
     tipoDirectiva {
-      nombreTipoDirectiva
-      descripTipoDirectiva
+      idTipoDir
+      nombre
+      descripcion
     }
   }  
 `;
