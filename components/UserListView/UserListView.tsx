@@ -13,7 +13,6 @@ import { useSession } from 'next-auth/react';
 
 export default function UserListView({type}: any) {
     const {data : session} = useSession();
-
     let query_type;
     let title;
     let variables = false;

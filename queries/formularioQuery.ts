@@ -37,6 +37,19 @@ query MyQuery3($idFormulario: Int!) {
 }
 `;
 
+export const QUERY_FORMULARIO_BY_AVION = gql`
+query MyQueryAvion($_eq: Int) {
+  formulario(where: {idAvion: {_eq: $_eq}}) {
+    nombre
+    tipoFormulario {
+      tipoFormulario
+    }
+    estado
+    diagnostico
+  }
+}
+`;
+
 
 export const QUERY_FORMULARIO_TECNICO = gql`
 query formularioxtenico($_eq: Int) {
