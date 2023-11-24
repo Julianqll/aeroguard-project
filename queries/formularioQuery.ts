@@ -11,6 +11,7 @@ mutation MyMutation($object: formulario_insert_input = {}) {
 export const QUERY_FORMULARIO = gql`
 query MyQuery2 {
     formulario {
+      idFormulario
       tipoFormulario{
         idTipoFormulario
         tipoFormulario
@@ -20,4 +21,18 @@ query MyQuery2 {
     }
   }
   
+`;
+
+export const QUERY_FORMULARIO_BY_ID = gql`
+query MyQuery3($idFormulario: Int!) {
+  formulario_by_pk(idFormulario: $idFormulario) {
+    diagnostico
+    idAvion
+    idFormulario
+    tipoFormulario{
+      tipoFormulario
+    }
+    nombre
+  }
+}
 `;
