@@ -7,3 +7,17 @@ mutation MyMutation($object: formulario_insert_input = {}) {
     }
   }
   `;
+
+export const QUERY_FORMULARIO = gql`
+query MyQuery2 {
+    formulario {
+      tipoFormulario{
+        idTipoFormulario
+        tipoFormulario
+      }
+      nombre
+      idAvion
+    }
+  }
+  
+`;

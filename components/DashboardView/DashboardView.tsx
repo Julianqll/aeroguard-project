@@ -4,6 +4,7 @@ import { Paper, Text, Grid, Flex, rem } from '@mantine/core';
 import classes from './DashboardView.module.css';
 import { PieChart } from '../PieChart/PieChart';
 import { TableReviews } from '../TableReviews/TableReviews';
+import UserListView from '../UserListView/UserListView';
 
 export default function DashboardView() {
     return (
@@ -31,10 +32,7 @@ export default function DashboardView() {
                 </Grid.Col>
             </Grid>
 
-            <div>
-                <Text size="lg" className={classes.tableHeader}>Reportes de Inspecciones #MEC0023</Text>
-                <TableReviews />
-            </div>
+            <UserListView type="formularios"></UserListView>
         </div>
     );
 }

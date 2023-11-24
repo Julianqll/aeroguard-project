@@ -8,6 +8,7 @@ import { GET_USUARIO } from '../../queries/usuarioQuery';
 import { GET_AVION } from '../../queries/avionQuery';
 import { GET_REPORTE_CAMBIO_PIEZAS } from '../../queries/reporteCambioPiezasQuery';
 import { GET_REPORTE_INSPECCION } from '../../queries/reporteInspeccionQuery';
+import { QUERY_FORMULARIO } from '../../queries/formularioQuery';
 
 export default function UserListView({type}: any) {
     let query_type;
@@ -32,6 +33,11 @@ export default function UserListView({type}: any) {
     {
         query_type = GET_REPORTE_CAMBIO_PIEZAS;
         title = "Reportes de Cambios de Piezas";
+    }
+    else if (type === 'formularios')
+    {
+        query_type = QUERY_FORMULARIO;
+        title = "Formularios recibidos"
     }
     const { data, loading, error } = useQuery(query_type!);
     if (loading)
