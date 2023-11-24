@@ -195,13 +195,15 @@ export default function AirplaneModelView({id} :any) {
                             image="https://upload.wikimedia.org/wikipedia/commons/c/c3/Hercules.propeller.arp.jpg"
                             title="Propeller"
                             description="Directivas del Propeller"
+                            href={`/propeller/${id}`}
                         />
                     </Grid.Col>
                     <Grid.Col span={4}>
                     <ImageCard
                             image="https://storage.googleapis.com/mcp_236blog/uploads/2018/12/Jet-engine-KLM-768x510.jpg"
                             title="Engine"
-                            description="Directivas del Aircraft"
+                            description="Directivas del Engine"
+                            href={`/engine/${id}`}
                         />
                     </Grid.Col>
                     <Grid.Col span={4}>
@@ -209,6 +211,7 @@ export default function AirplaneModelView({id} :any) {
                             image="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Airbus_A400M_Atlas_%28ZM400%29_-_ASCOT482.jpg/1200px-Airbus_A400M_Atlas_%28ZM400%29_-_ASCOT482.jpg"
                             title="Aircraft"
                             description="Directivas del Aircraft"
+                            href={`/aircraft/${id}`}
                         />
                     </Grid.Col>
                 </Grid>
@@ -218,6 +221,7 @@ export default function AirplaneModelView({id} :any) {
                             image="https://kellyaero.com/wp-content/uploads/2021/07/Factory-New-Aircraft-Magnetos-Kelly-Aero-Slick-Champion-OEM-Airplane-Engine-Replacement-Parts-202107.jpg"
                             title="Magneto"
                             description="Directivas del Magneto"
+                            href={`/magneto/${id}`}
                         />
                     </Grid.Col>
                     <Grid.Col span={4}>
@@ -225,6 +229,7 @@ export default function AirplaneModelView({id} :any) {
                             image="https://www.careerhunter.io/uploads/images/195/Airline-Pilot.jpg"
                             title="Appliance"
                             description="Directivas del Appliance"
+                            href={`/appliance/${id}`}
                         />                    
                     </Grid.Col>
                 </Grid>
