@@ -3,6 +3,7 @@ import { DocumentNode, useQuery } from "@apollo/client";
 import { Combobox, InputBase, Input, useCombobox, Text } from "@mantine/core";
 import { GET_ROL } from "../../queries/rolQuery";
 import { GET_TIPOS_DOCUMENTO } from "../../queries/tipoDocumentoQuery";
+import { GET_TECNICOS } from "../../queries/usuarioQuery";
 
 interface SelectorProps {
   type: string;
@@ -29,6 +30,11 @@ const Selector: React.FC<SelectorProps> = ({ type, value, setValue }) => {
   {
     query_type = GET_TIPOS_DOCUMENTO;
     nombre_selector = "Tipo Documento";
+  }
+  else if (type === "tecnico")
+  {
+    query_type = GET_TECNICOS;
+    nombre_selector = "Tecnicos";
   }
 
   const { data, loading, error } = useQuery(query_type!);
@@ -69,6 +75,21 @@ const Selector: React.FC<SelectorProps> = ({ type, value, setValue }) => {
 
     onOptionSubmit = (val:any) => {
       const selectedText = data.tipoDocumento.find((item: { idTipoDocumento: any; }) => item.idTipoDocumento === val)?.tipoDocumento;
+      setSelectedOption({ id: val, text: selectedText || '' });
+      setValue(val);
+      combobox.closeDropdown();
+    };
+  }
+  else if (type === "tecnico")
+  {
+    options = data && data.usuario ? data.usuario.map((item: any) => (
+      <Combobox.Option value={item.idUsuario} key={item.idUsuario}>
+        {item.nombres} {item.apellidos}
+      </Combobox.Option>
+    )) : [];  
+
+    onOptionSubmit = (val:any) => {
+      const selectedText = data.usuario.find((item: { idUsuario: any; }) => item.idUsuario === val)?.nombres + ' '+ data.usuario.find((item: { idUsuario: any; }) => item.idUsuario === val)?.apellidos;
       setSelectedOption({ id: val, text: selectedText || '' });
       setValue(val);
       combobox.closeDropdown();

@@ -18,6 +18,16 @@ query UsuarioQuery {
   }
 `;
 
+export const GET_TECNICOS = gql`
+query MyQuery2 {
+  usuario(where: {idRol: {_eq: 2}}) {
+    idUsuario
+    nombres
+    apellidos
+  }
+}
+`;
+
 export const DELETE_USUARIO= gql`
 mutation DeleteUsuario($_eq: Int) {
     delete_usuario(where: {idRol: {_eq: $_eq}}) {

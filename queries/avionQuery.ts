@@ -31,6 +31,12 @@ query AvionQuery {
         idFabricante
         nombre
       }
+      asignacionAvions{
+        usuario{
+          nombres
+          apellidos
+        }
+      }
     }
   }
   

@@ -1,23 +1,66 @@
 // Reportes.js
 "use client";
-import { Container, Grid, Text } from '@mantine/core';
+import { Button, Container, Grid, Text } from '@mantine/core';
 import classes from './AirplaneModelView.module.css';
 import Scene from '../Airplane/Airplane';
 import { TableSelection } from '../TableSelection/TableSelection';
 import { TableReviews } from '../TableReviews/TableReviews';
 import { ImageCard } from '../ImageCard/ImageCard';
 import { GET_AVION_QUERY_BY_ID } from '../../queries/avionQuery';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
+import Selector from '../Selector/Selector';
+import { useEffect, useState } from 'react';
+import { IconCheck, IconFileInfo, IconX } from '@tabler/icons-react';
+import { INSERT_ASIGNACION } from '../../queries/asignacionAvionQuery';
+import { notifications } from '@mantine/notifications';
+import { client } from '../../apolloClient';
 
 export default function AirplaneModelView({id} :any) {
+    const [valueTecnico, setValueTecnico] = useState<string | null>(null);
+    const [valueEditar, setValueEditar] = useState<boolean>(false);
 
     const { data, loading, error } = useQuery(GET_AVION_QUERY_BY_ID, {
         variables: { _eq:id },
     });
+
+    const [addAsignacion, { data:asignacionData, loading:asignacionLoading, error:asignacionError }] = useMutation(INSERT_ASIGNACION);
+
     if (loading) {
         return (<div>Cargando contenido...</div>)
     }
-    console.log(data);
+      
+      const handleGuardar = async () => {
+
+        const now = new Date();
+        const asignacion = {
+            idUsuario: valueTecnico?.toString(),
+            idAvion: id,
+            fechaRegistro: now,
+        };
+    
+        try {
+            const response = await addAsignacion({ variables: { object: asignacion } });
+            notifications.show({
+            color: 'green',
+            title: 'Asignación Registrada',
+            message: <>
+            Se ha creado la asignación {response.data.insert_asignacionAvion_one.idAsignacionAvion} con éxito
+            </>,
+            icon: <IconCheck size="1rem" />,
+            autoClose: false
+            });
+        } catch (error) {
+            console.log(error);
+            notifications.show({
+                color: 'red',
+                title: 'Error en el registro',
+                message: 'Hubo un error registrando la asignación',
+                icon: <IconX size="1rem" />,
+                autoClose: false
+                });
+        }
+      };
+    
 
     return (
         <div className={classes.container}>
@@ -28,6 +71,30 @@ export default function AirplaneModelView({id} :any) {
                         <Text>Datos del avión</Text>
                         <Text>Numero de serie: {data?.avion[0].numSerie}</Text>
                         <Text>Largo: {data?.avion[0].tipoCertificado}</Text>
+                        <Text>Tecnico Asignado: </Text>
+                        {(data?.avion[0].asignacionAvions[0] && !valueEditar) ? 
+                        <>
+                        <Text>{data?.avion[0].asignacionAvions[0].usuario.nombres} {data?.avion[0].asignacionAvions[0].usuario.apellidos}</Text>
+                        <Button 
+                            ml={15} 
+                            rightSection={<IconFileInfo size={14} />} 
+                            onClick={() => setValueEditar(true)}
+                            >
+                                Editar
+                        </Button>
+                        </>
+                        : <>
+                            <Text>*Se necesita asignar</Text>
+                            <Selector type="tecnico" value={valueTecnico} setValue={setValueTecnico} />
+                            <Button 
+                            ml={15} 
+                            rightSection={<IconFileInfo size={14} />} 
+                            onClick={handleGuardar}
+                            >
+                                Guardar
+                            </Button>
+                        </>
+                        }
                     </Container>
                 </Grid.Col>
                 <Grid.Col span={8}>
