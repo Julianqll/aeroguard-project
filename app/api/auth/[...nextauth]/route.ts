@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
                 if (passwordMatches)
                 {
                   const user = {
-                    id: data.usuario[0].id, // Assuming your user has an id field.
+                    id: data.usuario[0].idUsuario, // Assuming your user has an id field.
                     name: `${data.usuario[0].nombres} ${data.usuario[0].apellidos}`,
                     email: data.usuario[0].correo,
                     rol: data.usuario[0].idRol,
@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
           if (user) {
             return {
               ...token,
+              id:user.id,
               rol: user.rol,
             };
           }
@@ -68,6 +69,7 @@ export const authOptions: NextAuthOptions = {
             ...session,
             user :{
               ...session.user,
+              id:token.id,
               rol: token.rol,
             }
           };

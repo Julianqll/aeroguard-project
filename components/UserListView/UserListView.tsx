@@ -8,11 +8,15 @@ import { GET_USUARIO } from '../../queries/usuarioQuery';
 import { GET_AVION } from '../../queries/avionQuery';
 import { GET_REPORTE_CAMBIO_PIEZAS } from '../../queries/reporteCambioPiezasQuery';
 import { GET_REPORTE_INSPECCION } from '../../queries/reporteInspeccionQuery';
-import { QUERY_FORMULARIO } from '../../queries/formularioQuery';
+import { QUERY_FORMULARIO, QUERY_FORMULARIO_TECNICO } from '../../queries/formularioQuery';
+import { useSession } from 'next-auth/react';
 
 export default function UserListView({type}: any) {
+    const {data : session} = useSession();
+
     let query_type;
     let title;
+    let variables = false;
     if (type === 'aviones')
     {       
         query_type = GET_AVION;
@@ -39,11 +43,23 @@ export default function UserListView({type}: any) {
         query_type = QUERY_FORMULARIO;
         title = "Formularios recibidos"
     }
-    const { data, loading, error } = useQuery(query_type!);
+    else if (type === 'formularios_por_tecnico')
+    {
+        query_type = QUERY_FORMULARIO_TECNICO;
+        title = "Formularios asignados";
+        variables = true;
+    }
+    const { data, loading, error } = variables ?
+    useQuery(query_type!, {
+        variables: { _eq: session?.user.id},
+    })
+     : useQuery(query_type!);
     if (loading)
     {
         return (<div>Cargando contenido</div>)
     }
+    console.log(session?.user.id);
+
 
     return (
         <div className={classes.container}>

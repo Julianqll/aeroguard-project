@@ -36,3 +36,18 @@ query MyQuery3($idFormulario: Int!) {
   }
 }
 `;
+
+
+export const QUERY_FORMULARIO_TECNICO = gql`
+query formularioxtenico($_eq: Int) {
+  formulario(where: {avion: {asignacionAvions: {idUsuario: {_eq: $_eq}}}}) {
+    idFormulario
+    tipoFormulario {
+      tipoFormulario
+    }
+    nombre
+    idAvion
+  }
+}
+  
+`;
