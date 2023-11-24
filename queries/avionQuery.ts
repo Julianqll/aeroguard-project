@@ -15,6 +15,18 @@ query AvionQuery {
     }
   }
   `;
+
+  export const GET_AVION_TECNICO = gql`
+  query avionxtecnico($_eq: Int) {
+    avion(where: {asignacionAvions: {idUsuario: {_eq: $_eq}}}) {
+      idAvion
+      numRegistro
+      numSerie
+      tipoCertificado
+    }
+  }
+  `;
+  
   
   export const GET_AVION_QUERY_BY_ID = gql`
   query AvionQuery($_eq: Int) {

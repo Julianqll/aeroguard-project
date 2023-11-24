@@ -5,7 +5,7 @@ import classes from './UserListView.module.css';
 import { TableSelection } from '../TableSelection/TableSelection';
 import { useQuery } from '@apollo/client';
 import { GET_USUARIO } from '../../queries/usuarioQuery';
-import { GET_AVION } from '../../queries/avionQuery';
+import { GET_AVION, GET_AVION_TECNICO } from '../../queries/avionQuery';
 import { GET_REPORTE_CAMBIO_PIEZAS } from '../../queries/reporteCambioPiezasQuery';
 import { GET_REPORTE_INSPECCION } from '../../queries/reporteInspeccionQuery';
 import { QUERY_FORMULARIO, QUERY_FORMULARIO_TECNICO } from '../../queries/formularioQuery';
@@ -21,6 +21,13 @@ export default function UserListView({type}: any) {
     {       
         query_type = GET_AVION;
         title = "Aviones";
+
+    }
+    else if (type === 'aviones_por_tecnico')
+    {       
+        query_type = GET_AVION_TECNICO;
+        title = "Aviones asignados";
+        variables = true;
 
     }
     else if (type === 'usuarios')

@@ -43,6 +43,34 @@ export function TableSelection({
       );
     });
   }
+  else if (type === 'aviones_por_tecnico')
+  {
+    headers = ["Numero de Registro","Numero de Serie", "Certificado", "Información"];
+     rows = data.avion!.map((item:any) => {
+      return (
+        <Table.Tr key={item.idAvion}>
+          <Table.Td>
+            <Group gap="sm">
+              <Text size="sm" fw={500}>
+                {item.numRegistro}
+              </Text>
+            </Group>
+          </Table.Td>
+          <Table.Td>{item.numSerie}</Table.Td>
+          <Table.Td>{item.tipoCertificado}</Table.Td>
+          <Table.Td>
+            <Button 
+              ml={15} 
+              rightSection={<IconFileInfo size={14} />} 
+              onClick={() => router.push(`/avion/${item.idAvion}`)}
+              >
+                Información
+            </Button>
+          </Table.Td>
+        </Table.Tr>
+      );
+    });
+  }
   else if (type === 'usuarios')
   {
     headers = ["Usuario","Correo", "Documento"];
