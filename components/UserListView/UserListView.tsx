@@ -1,6 +1,6 @@
 // Reportes.js
 "use client";
-import { Text } from '@mantine/core';
+import { Button, Text } from '@mantine/core';
 import classes from './UserListView.module.css';
 import { TableSelection } from '../TableSelection/TableSelection';
 import { useQuery } from '@apollo/client';
@@ -11,8 +11,12 @@ import { GET_REPORTE_INSPECCION } from '../../queries/reporteInspeccionQuery';
 import { QUERY_FORMULARIO, QUERY_FORMULARIO_TECNICO } from '../../queries/formularioQuery';
 import { useSession } from 'next-auth/react';
 import { QUERY_AIRCRAFT, QUERY_APPLIANCE, QUERY_ENGINE, QUERY_MAGNETO, QUERY_PROPELLER } from '../../queries/directivaQuery';
+import { IconFileInfo } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
 
 export default function UserListView({type}: any) {
+    const router = useRouter();
+
     const {data : session} = useSession();
     let query_type;
     let title;
@@ -102,6 +106,13 @@ export default function UserListView({type}: any) {
         <div className={classes.container}>
             <div>
                 <Text size="xl" className={classes.header}>{title} registrados</Text>
+                <Button 
+                ml={15} 
+                rightSection={<IconFileInfo size={14} />} 
+                onClick={() => router.push(`/registro`)}
+                >
+                Registrar Usuario
+                </Button>
                 <TableSelection type={type} data={data}></TableSelection>
             </div>
         </div>
