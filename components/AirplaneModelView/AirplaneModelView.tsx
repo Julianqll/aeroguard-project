@@ -184,7 +184,7 @@ export default function AirplaneModelView({id} :any) {
                 <Text mt={"30px"} size="xl" className={classes.header}>Formulario Pendiente</Text>
                 {loadingAvionForm ? <div>Cargando contenido...</div> : null}
                 {avionFormDataPending?.formulario[0].nombre}
-                {StatsGrid(avionFormDataPending?.formulario[0].idFormulario)}
+                {StatsGrid(avionFormDataPending?.formulario[0].idFormulario, avionFormDataPending?.formulario[0].estado)}
             </div>
             <div>
             <Text mt={"30px"} size="xl" className={classes.header}>Historial de formularios</Text>

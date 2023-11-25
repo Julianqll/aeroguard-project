@@ -76,6 +76,14 @@ query formularioxtenico($_eq: Int) {
     nombre
     idAvion
   }
+}  
+`;
+
+export const QUERY_UPDATE_FORMULARIO = gql`
+mutation UpdateForm($idFormulario: Int) {
+  update_formulario_by_pk(pk_columns: {idFormulario: $idFormulario}, _set: {estado: "Completado"}) {
+    idFormulario
+    estado
+  }
 }
-  
 `;

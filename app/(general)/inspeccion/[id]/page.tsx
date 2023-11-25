@@ -3,14 +3,14 @@
 
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-import { FormularioCambioPiezas } from '../../../components/FormularioCambioPiezas/FormularioCambioPiezas';
+import { FormularioInspeccion } from '../../../../components/FormularioInspeccion/FormularioInspeccion';
 
-export default function piezaPage (){
+export default function InspeccionPage (){
   const {data : session} = useSession();
     if (!session) {
       redirect("/signIn")
     }  
   return (
-    <FormularioCambioPiezas></FormularioCambioPiezas>      
+    <FormularioInspeccion></FormularioInspeccion>   
   )
 }
