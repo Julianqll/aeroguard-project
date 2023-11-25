@@ -131,6 +131,26 @@ export function TableSelection({
       );
     });
   }
+  else if (type === 'solicitudes')
+  {
+    headers = ["ID Orden","Proveedor", "Descripcion", "Fecha de Recepción"];
+    rows = data.ordenCompra!.map((item:any) => {
+      return (
+        <Table.Tr key={item.idOrdenCompra}>
+          <Table.Td>
+            <Group gap="sm">
+              <Avatar size={26} radius={26} />
+              <Text size="sm" fw={500}>
+                {item.idProveedor}
+              </Text>
+            </Group>
+          </Table.Td>
+          <Table.Td>{item.descripcion}</Table.Td>
+          <Table.Td>{item.fechaRecepcion}</Table.Td>
+        </Table.Tr>
+      );
+    });
+  }
   else if (type === 'formularios')
   {
     headers = ["Tipo Formulario","Nombre", "Id Avion", "Ver más"];

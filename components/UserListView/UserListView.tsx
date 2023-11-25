@@ -13,6 +13,7 @@ import { useSession } from 'next-auth/react';
 import { QUERY_AIRCRAFT, QUERY_APPLIANCE, QUERY_ENGINE, QUERY_MAGNETO, QUERY_PROPELLER } from '../../queries/directivaQuery';
 import { IconFileInfo } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
+import { GET_ORDEN_COMPRA } from '../../queries/ordenCompraQuery';
 
 export default function UserListView({type}: any) {
     const router = useRouter();
@@ -90,6 +91,11 @@ export default function UserListView({type}: any) {
         title = "Formularios asignados";
         variables = true;
     }
+    else if (type === 'solicitudes')
+    {
+        query_type = GET_ORDEN_COMPRA;
+        title = "Ordenes de Compra";
+    }
     const { data, loading, error } = variables ?
     useQuery(query_type!, {
         variables: { _eq: session?.user.id},
@@ -106,13 +112,16 @@ export default function UserListView({type}: any) {
         <div className={classes.container}>
             <div>
                 <Text size="xl" className={classes.header}>{title} registrados</Text>
-                <Button 
-                ml={15} 
-                rightSection={<IconFileInfo size={14} />} 
-                onClick={() => router.push(`/registro`)}
-                >
-                Registrar Usuario
-                </Button>
+                {type === "usuarios"?
+                                <Button 
+                                ml={15} 
+                                rightSection={<IconFileInfo size={14} />} 
+                                onClick={() => router.push(`/registro`)}
+                                >
+                                Registrar Usuario
+                                </Button>
+                :
+                null}
                 <TableSelection type={type} data={data}></TableSelection>
             </div>
         </div>
