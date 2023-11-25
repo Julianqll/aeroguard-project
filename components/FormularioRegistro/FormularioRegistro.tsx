@@ -91,7 +91,7 @@ function FormularioRegistro() {
             };
         
             try {
-              const response = await addUser({ variables: { input: user } });
+              const response = await addUser({ variables: { object: user } });
               notifications.show({
                 color: 'green',
                 title: 'Usuario Registrado',
