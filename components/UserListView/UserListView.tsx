@@ -10,6 +10,7 @@ import { GET_REPORTE_CAMBIO_PIEZAS } from '../../queries/reporteCambioPiezasQuer
 import { GET_REPORTE_INSPECCION } from '../../queries/reporteInspeccionQuery';
 import { QUERY_FORMULARIO, QUERY_FORMULARIO_TECNICO } from '../../queries/formularioQuery';
 import { useSession } from 'next-auth/react';
+import { QUERY_AIRCRAFT, QUERY_APPLIANCE, QUERY_ENGINE, QUERY_MAGNETO, QUERY_PROPELLER } from '../../queries/directivaQuery';
 
 export default function UserListView({type}: any) {
     const {data : session} = useSession();
@@ -20,6 +21,36 @@ export default function UserListView({type}: any) {
     {       
         query_type = GET_AVION;
         title = "Aviones";
+
+    }
+    else if (type === 'propeller')
+    {       
+        query_type = QUERY_PROPELLER;
+        title = "Directivas - Propeller";
+
+    }
+    else if (type === 'engine')
+    {       
+        query_type = QUERY_ENGINE;
+        title = "Directivas - Engine";
+
+    }
+    else if (type === 'aircraft')
+    {       
+        query_type = QUERY_AIRCRAFT;
+        title = "Directivas - Aircraft";
+
+    }
+    else if (type === 'magneto')
+    {       
+        query_type = QUERY_MAGNETO;
+        title = "Directivas - Magneto";
+
+    }
+    else if (type === 'appliance')
+    {       
+        query_type = QUERY_APPLIANCE;
+        title = "Directivas - Appliance";
 
     }
     else if (type === 'aviones_por_tecnico')

@@ -218,6 +218,43 @@ export function TableSelection({
       );
     });
   }
+  else if(type === "propeller")
+  {
+    headers = ["AD Directiva","Documento de Instruccion", "Documento de Referencia", "Fecha"];
+    rows = data?.directiva?.map((item:any) => {
+      return (
+        <Table.Tr key={item.idDirectiva}>
+          <Table.Td>
+              <Text size="sm" fw={500}>
+                {item.ad}
+              </Text>
+          </Table.Td>
+          <Table.Td>{item.docInstruc}</Table.Td>
+          <Table.Td>{item.documentoRef}</Table.Td>
+          <Table.Td>{item.fechaDirectiva}</Table.Td>
+        </Table.Tr>
+      );
+    });
+  }
+
+    else if(type === "propeller"||type === "engine"||type === "aircraft"||type === "magneto"||type === "appliance")
+  {
+    headers = ["AD Directiva","Documento de Instruccion", "Documento de Referencia", "Fecha"];
+    rows = data?.directiva?.map((item:any) => {
+      return (
+        <Table.Tr key={item.idDirectiva}>
+          <Table.Td>
+              <Text size="sm" fw={500}>
+                {item.ad}
+              </Text>
+          </Table.Td>
+          <Table.Td>{item.docInstruc}</Table.Td>
+          <Table.Td>{item.documentoRef}</Table.Td>
+          <Table.Td>{item.fechaDirectiva}</Table.Td>
+        </Table.Tr>
+      );
+    });
+  }
 
   let theaders = headers.map((item:any) => {
     return (

@@ -58,3 +58,60 @@ mutation UpdateDirectiva($idDirectiva: Int!) {
     }
   }
 `;
+
+export const QUERY_PROPELLER = gql`
+query MyQuerypropeller {
+  directiva(where: {idTipoDir: {_eq: 1}}) {
+    ad
+    docInstruc
+    documentoRef
+    fechaDirectiva
+  }
+}
+`;
+
+export const QUERY_ENGINE= gql`
+query MyQuerypropeller {
+  directiva(where: {idTipoDir: {_eq: 2}}) {
+    ad
+    docInstruc
+    documentoRef
+    fechaDirectiva
+  }
+}
+`;
+
+export const QUERY_AIRCRAFT= gql`
+query MyQuerypropeller {
+  directiva(where: {idTipoDir: {_eq: 3}}) {
+    ad
+    docInstruc
+    documentoRef
+    fechaDirectiva
+  }
+}
+`;
+
+export const QUERY_MAGNETO= gql`
+query MyQuerypropeller {
+  directiva(where: {idTipoDir: {_eq: 4}}) {
+    idDirectiva
+    ad
+    docInstruc
+    documentoRef
+    fechaDirectiva
+  }
+}
+`;
+
+
+export const QUERY_APPLIANCE= gql`
+query MyQuerypropeller {
+  directiva(where: {idTipoDir: {_eq: 5}}) {
+    ad
+    docInstruc
+    documentoRef
+    fechaDirectiva
+  }
+}
+`;
